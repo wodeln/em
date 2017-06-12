@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>嘉奕医学创伤急救云管理平台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/datetimepicker.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/peskin.css" />
+	<!--[if lt IE 9]>
+	<script src="app/core/styles/js/html5shiv.min.js"></script>
+	<script src="app/core/styles/js/respond.min.js"></script>
+	<![endif]-->
+	<script src="app/core/styles/js/jquery.min.js"></script>
+	<script src="app/core/styles/js/jquery-ui.min.js"></script>
+	<script src="app/core/styles/js/bootstrap.min.js"></script>
+	<script src="app/core/styles/js/bootstrap-datetimepicker.js"></script>
+
+	<script src="app/core/styles/js/all.fine-uploader.min.js"></script>
+
+	<script src="app/core/styles/js/ckeditor/ckeditor.js"></script>
+	<script src="app/core/styles/js/plugin.js"></script>
+</head><body>
+<div class="container-fluid box" style="margin:0px auto;padding-top:10px;overflow:visible">	<div class="row-fluid">		<div class="main">			<div class="col-xs-3">				<h1 style="font-size:30px;color:#337AB7;"><img src="app/core/styles/img/logo2.png" style="height:35px;margin-top:-10px;"/>&nbsp;<b>嘉奕医学</b></h1>			</div>			<div class="col-xs-1">			</div>			<div class="col-xs-6" style="padding-top:22px;">				<div class="form-inline">					<div class="form-group">						<input type="text" style="width:380px;" class="form-control" id="keyword" placeholder="搜索课程/资料">					</div>					<button type="button" class="btn btn-info" onclick="javascript:window.location='index.php?content-app-search&keyword='+$('#keyword').val();">搜资料</button>					<button type="button" class="btn btn-primary" onclick="javascript:window.location='index.php?course-app-search&keyword='+$('#keyword').val();">搜课程</button>				</div>			</div>			<div class="col-xs-2" style="padding-top:22px;">				<ul class="list-unstyled list-inline">										<li>						<div class="btn-group">							<button type="button" class="btn btn-info"><em class="glyphicon glyphicon-user"></em> 15021464552</button>							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">								<span class="caret"></span>								<span class="sr-only">Toggle Dropdown</span>							</button>							<ul class="dropdown-menu">								<li><a href="index.php?user-center"><em class="glyphicon glyphicon-user"></em> 用户中心</a></li>								<li><a href="index.php?exam-teach"><em class="glyphicon glyphicon-book"></em> 教师管理</a></li>																<li><a class="ajax" href="index.php?user-app-logout"><em class="glyphicon glyphicon-log-out"></em> 退出</a></li>							</ul>						</div>					</li>									</ul>			</div>		</div>	</div></div><div class="container-fluid navbar" style="margin-top:0px;margin-bottom:0px;padding-top:10px;background-color:#337AB7;">	<div class="row-fluid">		<div class="main">			<div class="col-xs-12">				<ul class="list-unstyled list-inline">					<li class="menu col-xs-1"><a href="index.php" class="icon">首页</a></li>					<li class="menu col-xs-1"><a href="index.php?course">课程</a></li>					<li class="menu col-xs-1 active"><a href="index.php?exam">考试</a></li>				</ul>			</div>		</div>	</div></div><div class="container-fluid">
+	<div class="row-fluid">
+		<div class="main">
+			<div class="col-xs-2" style="padding-top:10px;margin-bottom:0px;">
+				<style>.panel-heading a{color:#FFFFFF;text-decoration:none;}</style><div class="panel-group" id="panel-13465">	<div class="panel panel-primary">		<div class="panel-heading">			<a class="panel-toggle text-center" data-parent="#panel-13465" data-toggle="collapse" href="#panel-element-707348">				<em class="glyphicon glyphglyphicon glyphicon-th-large"></em> 考试设计			</a>		</div>		<div id="panel-element-707348" class="panel-collapse collapse" role="tabpanel">     		<ul class="list-group">				<li class="list-group-item"><a href="?exam-teach-basic">考场列表</a></li>			</ul>		</div>	</div>	<div class="panel panel-primary">		<div class="panel-heading">			<a class="panel-toggle text-center" data-parent="#panel-13465" data-toggle="collapse" href="#panel-element-2120901">				<em class="glyphicon glyphglyphicon glyphicon-wrench"></em> 课程成绩			</a>		</div>		<div id="panel-element-2120901" class="panel-collapse in collapse" role="tabpanel">     		<ul class="list-group">				<li class="list-group-item"><a href="index.php?exam-teach-users">成绩管理</a></li>			</ul>		</div>	</div>	<div class="panel panel-primary">		<div class="panel-heading">			<a class="panel-toggle text-center" data-parent="#panel-13465" data-toggle="collapse" href="#panel-element-212076">				<em class="glyphicon glyphglyphicon glyphicon-text-color"></em> 试题管理			</a>		</div>		<div id="panel-element-212076" class="panel-collapse collapse" role="tabpanel">     		<ul class="list-group">				<li class="list-group-item"><a href="index.php?exam-teach-questions">普通试题管理</a></li>				<li class="list-group-item"><a href="index.php?exam-teach-rowsquestions">题帽题管理</a></li>			</ul>		</div>	</div>	<div class="panel panel-primary">		<div class="panel-heading">			<a class="panel-toggle text-center" data-parent="#panel-13465" data-toggle="collapse" href="#panel-element-212096">				<em class="glyphicon glyphglyphicon glyphicon-duplicate"></em> 试卷管理			</a>		</div>		<div id="panel-element-212096" class="panel-collapse collapse" role="tabpanel">     		<ul class="list-group">				<li class="list-group-item"><a href="index.php?exam-teach-exams">试卷列表</a></li>				<li class="list-group-item"><a href="index.php?exam-teach-exams-autopage">随机组卷</a></li>				<li class="list-group-item"><a href="index.php?exam-teach-exams-selfpage">手工组卷</a></li>				<li class="list-group-item"><a href="index.php?exam-teach-exams-temppage">即时组卷</a></li>			</ul>		</div>	</div>	<div class="panel panel-primary">		<div class="panel-heading">			<a class="panel-toggle text-center" data-parent="#panel-13465" data-toggle="collapse" href="#panel-element-212090">				<em class="glyphicon glyphglyphicon glyphicon-trash"></em> 回收站			</a>		</div>		<div id="panel-element-212090" class="panel-collapse collapse" role="tabpanel">     		<ul class="list-group">				<li class="list-group-item"><a href="index.php?exam-teach-recyle">普通试题</a></li>				<li class="list-group-item"><a href="index.php?exam-teach-recyle-rows">题帽题</a></li>			</ul>		</div>	</div></div>			</div>
+			<div class="col-xs-10" id="datacontent">
+				<div class="box itembox" style="margin-bottom:0px;border-bottom:1px solid #CCCCCC;">
+					<div class="col-xs-12">
+						<ol class="breadcrumb">
+							<li><a href="index.php?exam-teach">考试模块</a></li>
+							<li><a href="index.php?exam-teach-users">课程成绩</a></li>
+							<li class="active">成绩分析</li>
+						</ol>
+					</div>
+				</div>
+				<div class="box itembox" style="padding-top:10px;margin-bottom:0px;">
+					<h4 class="title" style="padding:10px;">
+						试题正确率分析
+						<a class="pull-right btn btn-primary" href="index.php?exam-teach-users-stats&basicid=77&type=1">知识点正确率分析</a></a>
+					</h4>
+			        <table class="table table-hover table-bordered">
+						<thead>
+							<tr class="info">
+			                    <th>ID</th>
+			                    <th width="50%">试题名称</th>
+			                    <th>A</th>
+			                    <th>B</th>
+			                    <th>C</th>
+			                    <th>D</th>
+			                    <th>正确次数</th>
+			                    <th>出现次数</th>
+						        <th>正确率</th>
+			                </tr>
+			            </thead>
+			            <tbody>
+		                    					        <tr>
+								<td>
+									1								</td>
+								<td>
+									古代女子成年行什么礼？								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									8								</td>
+								<td>
+									古希腊哪个国家的儿童一出世就要受到严格挑选，体质弱的会被抛之荒野？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									17								</td>
+								<td>
+									世界上第一家麻将博物馆坐落在：								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									27								</td>
+								<td>
+									早期人类家庭的进步，与哪种事业关系最密切？								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									41								</td>
+								<td>
+									涮羊肉起源于								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									44								</td>
+								<td>
+									中国历史上被称为始皇帝的不是嬴政，对吗？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									49								</td>
+								<td>
+									下列官名中哪些不是唐朝的官名？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									2								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									66								</td>
+								<td>
+									战国时，“纸上谈兵”招致兵败的赵国将领是：								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									81								</td>
+								<td>
+									王安石变法发生在宋朝哪个皇帝在位期间？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									85								</td>
+								<td>
+									在第二次世界大战中，中途岛战役发生在哪两个国家之间？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									120								</td>
+								<td>
+									秦桧是不是最早被称为汉奸的人？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									124								</td>
+								<td>
+									秦始皇把正月改叫端月是为了避讳自己的名字，对吗？								</td>
+								<td>
+									66.67%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									2								</td>
+								<td>
+									3								</td>
+								<td>
+									66.67%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									134								</td>
+								<td>
+									我国西晋的第一代皇帝名叫：								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									135								</td>
+								<td>
+									我国宋代邢窑出白釉瓷、越窑出青釉瓷，所以有：								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									145								</td>
+								<td>
+									屈原是春秋时代哪国人？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									149								</td>
+								<td>
+									在世界上首创用汤药治病的是：								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									162								</td>
+								<td>
+									拿破仑统治时期，法国的主要对手是：								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									178								</td>
+								<td>
+									中国古代曾有多次的焚书事件，下列帝王焚书最多的是：								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0								</td>
+								<td>
+									1								</td>
+								<td>
+									0%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									181								</td>
+								<td>
+									我国古代有人口统计机构吗？								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									2								</td>
+								<td>
+									2								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        					        <tr>
+								<td>
+									221								</td>
+								<td>
+									最早的印玺，是盖在什么上面的？								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									100%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									0%
+								</td>
+								<td>
+									1								</td>
+								<td>
+									1								</td>
+								<td>
+									100%
+								</td>
+							</tr>
+					        			        	</tbody>
+			        </table>
+			        <ul class="pagination pull-right">
+			            <li><a href="#" class="current">1</a></li><li><a target="" href="index.php?exam-teach-users-stats&basicid=77&page=2">2</a></li><li><a target="" href="index.php?exam-teach-users-stats&basicid=77&page=3">3</a></li><li><a>共43条数据</a></li>			        </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid box" style="background-color:#337AB7;margin-bottom:0px;" id="footer">
+	<div class="row-fluid">
+		<div class="main itembox">
+			<div class="col-xs-12">
+				<ul class="list-unstyled">
+					<li class="text-center"><a href="">嘉奕医学创伤急救云培训平台</a></li>					<li class="text-center"><a href="">Copyright © 嘉奕医学科技爱有限公司  2017</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div></body>
+</html>

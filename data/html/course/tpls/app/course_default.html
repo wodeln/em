@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>嘉奕医学创伤急救云管理平台</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/datetimepicker.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="app/core/styles/css/peskin.css" />
+	<!--[if lt IE 9]>
+	<script src="app/core/styles/js/html5shiv.min.js"></script>
+	<script src="app/core/styles/js/respond.min.js"></script>
+	<![endif]-->
+	<script src="app/core/styles/js/jquery.min.js"></script>
+	<script src="app/core/styles/js/jquery-ui.min.js"></script>
+	<script src="app/core/styles/js/bootstrap.min.js"></script>
+	<script src="app/core/styles/js/bootstrap-datetimepicker.js"></script>
+
+	<script src="app/core/styles/js/all.fine-uploader.min.js"></script>
+
+	<script src="app/core/styles/js/ckeditor/ckeditor.js"></script>
+	<script src="app/core/styles/js/plugin.js"></script>
+</head><body>
+<div class="container-fluid box" style="margin:0px auto;padding-top:10px;overflow:visible">
+	<div class="row-fluid">
+		<div class="main">
+			<div class="col-xs-3">
+				<h1 style="font-size:30px;color:#337AB7;"><img src="app/core/styles/img/logo2.png" style="height:35px;margin-top:-10px;"/>&nbsp;<b>嘉奕医学</b></h1>
+			</div>
+			<div class="col-xs-1">
+			</div>
+			<div class="col-xs-6" style="padding-top:22px;">
+				<div class="form-inline">
+					<div class="form-group">
+						<input type="text" style="width:380px;" class="form-control" id="keyword" placeholder="搜索课程/资料">
+					</div>
+					<button type="button" class="btn btn-info" onclick="javascript:window.location='index.php?content-app-search&keyword='+$('#keyword').val();">搜资料</button>
+					<button type="button" class="btn btn-primary" onclick="javascript:window.location='index.php?course-app-search&keyword='+$('#keyword').val();">搜课程</button>
+				</div>
+			</div>
+			<div class="col-xs-2" style="padding-top:22px;">
+				<ul class="list-unstyled list-inline">
+										<li>
+						<div class="btn-group">
+							<button type="button" class="btn btn-info"><em class="glyphicon glyphicon-user"></em> peadmin</button>
+							<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li><a href="index.php?user-center"><em class="glyphicon glyphicon-user"></em> 用户中心</a></li>
+																<li><a href="index.php?core-master"><em class="glyphicon glyphicon-dashboard"></em> 后台管理</a></li>								<li><a class="ajax" href="index.php?user-app-logout"><em class="glyphicon glyphicon-log-out"></em> 退出</a></li>
+							</ul>
+						</div>
+					</li>
+									</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid navbar" style="margin-top:0px;margin-bottom:0px;padding-top:10px;background-color:#337AB7;">
+	<div class="row-fluid">
+		<div class="main">
+			<div class="col-xs-12">
+				<ul class="list-unstyled list-inline">
+					<li class="menu col-xs-1"><a href="index.php" class="icon">首页</a></li>
+					<li class="menu col-xs-1 active"><a href="index.php?course">课程</a></li>
+					<li class="menu col-xs-1"><a href="index.php?exam">考试</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div><div class="container-fluid">
+    <div class="row-fluid">
+        <div class="main">
+            <div class="box itembox" style="margin-bottom:0px;">
+                <div class="col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="index.php">首页</a></li>
+                        <li><a href="index.php?course">课程</a></li>
+                                                <li class="active">创伤急救（新版）</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="main" id="datacontent">
+            
+            <div class="col-xs-5" style="padding-left:0px;">
+                <div class="box itembox" style="padding-top:20px;">
+                    <h4 class="title">止血、包扎、固定</h4>
+                                    </div>
+                                <input type="hidden" class="count_courseware" value="">
+                <div class="box itembox" style="padding-top:20px;">
+                    <div class="col-xs-6">
+                        <a csid="3" contentid="9"
+                           class="thumbnail pull-left ajax">
+                            <img src="files/attach/images/content/20170607/14968168753261.jpg" alt="" width="100%">
+                        </a>
+                    </div>
+                    <div class="col-xs-6" style="overflow: hidden;text-overflow: ellipsis; height: 120px;">
+                        <a csid="3" contentid="9" class="ajax"><h4
+                                    class="title">创伤的院前急救</h4></a>
+                        <p><p>5～9分为轻伤；10～16分为中度伤；＞17分为重伤。现场急救人员可将TI＞10分的伤员送往创伤中心或大医院</p>
+
+<p>&nbsp;</p></p>
+                        <p>
+                            <!--<span class="pull-right">
+																<a href="javascript:;" style="color:green;"><em class="glyphicon glyphicon-play"></em> 播放中</a>
+															</span> -->
+                        </p>
+                    </div>
+                </div>
+                                <input type="hidden" class="count_courseware" value="">
+                <div class="box itembox" style="padding-top:20px;">
+                    <div class="col-xs-6">
+                        <a csid="3" contentid="10"
+                           class="thumbnail pull-left ajax">
+                            <img src="app/core/styles/images/noimage.gif" alt="" width="100%">
+                        </a>
+                    </div>
+                    <div class="col-xs-6" style="overflow: hidden;text-overflow: ellipsis; height: 120px;">
+                        <a csid="3" contentid="10" class="ajax"><h4
+                                    class="title">创伤基本生命支持</h4></a>
+                        <p><p>对有呼吸困难或呼吸停止的，应紧急开放气道，保证呼吸道通畅及进行呼吸支持，对心脏骤停者进行连续心脏按压</p></p>
+                        <p>
+                            <!--<span class="pull-right">
+															</span> -->
+                        </p>
+                    </div>
+                </div>
+                                <ul class="pagination pagination-right"></ul>
+            </div>
+
+            <div class="col-xs-7" style="padding-right:0px;position:relative;">
+                <div class="box itembox" id="course_content" style="width:685px;top:0px;" data-spy="affix" data-offset-top="245">
+                                                                                    <div style='overflow:auto;'><p>5～9分为轻伤；10～16分为中度伤；＞17分为重伤。现场急救人员可将TI＞10分的伤员送往创伤中心或大医院</p>
+
+<p>&nbsp;</p></div>
+                                    </div>
+            </div>
+                    </div>
+    </div>
+</div>
+<div class="container-fluid box" style="background-color:#337AB7;margin-bottom:0px;" id="footer">
+	<div class="row-fluid">
+		<div class="main itembox">
+			<div class="col-xs-12">
+				<ul class="list-unstyled">
+					<li class="text-center"><a href="">嘉奕医学创伤急救云培训平台</a></li>					<li class="text-center"><a href="">Copyright © 嘉奕医学科技爱有限公司  2017</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div></body>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        var maxHeight=""
+        if($("input[class='count_courseware']").length==1){
+            maxHeight=450;
+        }else if($("input[class='count_courseware']").length==2) {
+            maxHeight = 500;
+        }else{
+            maxHeight = $("input[class='count_courseware']").length * 200;
+        }
+        $("#course_content").find("div").css("max-height",maxHeight);
+    });
+
+
+
+    $(".ajax").click(function () {
+        var contentid = $(this).attr("contentid");
+        $.ajax({
+            type: 'get',
+            url: "index.php?course-app-course-getCourseById&contentid=" + contentid,
+            success: function (data) {
+                var courseContent = eval("(" + data + ")");
+                var htmlStr = "";
+                var c = "";
+                if (courseContent["ppt_file"] != "") {
+                    c = "ViewerJS/#../" + courseContent["ppt_file"];
+                    htmlStr = "<iframe src='" + c + "' width='100%' height='450' style='margin-top: 20px;' allowfullscreen webkitallowfullscreen></iframe>";
+                }
+                if (courseContent["course_files"] != "") {
+                    c = courseContent["course_files"];
+                    htmlStr = "<video style='margin-top:20px;' controls='true' width='100%' height='450'> <source src='" + c + "' type='video/mp4' /> </video>"
+                }
+                if (courseContent["ppt_file"] == "" && courseContent["course_files"] == "") {
+                    var maxHeight=""
+                    c = courseContent["coursedescribe"];
+                    if($("input[class='count_courseware']").length==1){
+                        maxHeight=450;
+                    }else if($("input[class='count_courseware']").length==2) {
+                        maxHeight = 500;
+                    }else{
+                        maxHeight = $("input[class='count_courseware']").length * 200;
+                    }
+
+                    htmlStr = "<div style='overflow:auto;max-height: "+maxHeight+"px;'>" + escape2Html(c) + "</div>"
+                }
+                $('#course_content').html(htmlStr);
+            }
+        });
+    });
+
+    function escape2Html(str) {
+        var arrEntities ={'lt':'<','gt':'>','nbsp':' ','amp':'&','quot':'"'};
+        return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t){return arrEntities[t];});
+    }
+</script>
+</html>
