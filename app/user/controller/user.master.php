@@ -269,6 +269,7 @@ class action extends app
 		if($search['username'])$args[] = array('AND',"username LIKE :username",'username','%'.$search['username'].'%');
 		if($search['useremail'])$args[] = array('AND',"useremail  LIKE :useremail",'useremail','%'.$search['useremail'].'%');
 		if($search['groupid'])$args[] = array('AND',"usergroupid = :usergroupid",'usergroupid',$search['groupid']);
+		if($search['userclassid']) $args[]=array('AND',"userclassid = :userclassid",'userclassid',$search['userclassid']);
 		if($search['stime'] || $search['etime'])
 		{
 			if(!is_array($args))$args = array();
@@ -282,6 +283,8 @@ class action extends app
 			}
 		}
 		$users = $this->user->getUserList($page,10,$args);
+        $userClasses = $this->user->getUserClassList(1, 500);
+        $this->tpl->assign('userClasses', $userClasses);
 		$this->tpl->assign('users',$users);
 		$this->tpl->assign('search',$search);
 		$this->tpl->assign('u',$u);
@@ -296,6 +299,16 @@ class action extends app
         $classid = $this->ev->get('classid');
         $userList = $this->user->getUserByClassId($classid);
         exit(json_encode($userList));
+    }
+
+    /**
+     * 根据 用户类型ID获取 form项目
+     */
+    private function getUserFormsById(){
+		$moduleId = $this->ev->get("moduleid");
+        $fields = $this->module->getMoudleFields($moduleId,array('iscurrentuser'=> $this->_user['sessionuserid'] ,'group' => $this->user->getGroupById($this->_user['sessiongroupid'])));
+        $forms = $this->html->buildHtml($fields);
+        exit(json_encode($forms));
     }
 }
 

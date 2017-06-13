@@ -41,7 +41,7 @@
 				</div>
 				<div class="box itembox">
 					<h4 class="title" style="padding:10px;">
-						性别[normal_sex]
+						可管理科目[teacher_subjects]
 					</h4>
 					<div id="tabs-694325" class="tabbable">
 						<ul class="nav nav-tabs">
@@ -62,7 +62,7 @@
 									<div class="form-group">
 										<label class="control-label col-sm-2">字段别名：</label>
 										<div class="col-sm-4">
-											<input class="form-control" type="text" size="40" name="args[fieldtitle]" needle="needle" datatype="userName" id="fieldtitle" msg="您必须填写字段别名，字段别名必须为中英文字符或数字" value="性别"/>
+											<input class="form-control" type="text" size="40" name="args[fieldtitle]" needle="needle" datatype="userName" id="fieldtitle" msg="您必须填写字段别名，字段别名必须为中英文字符或数字" value="可管理科目"/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -74,9 +74,9 @@
 										  		<option value="password">密码域(password)</option>
 										  		<option value="hidden">隐藏域(hidden)</option>
 										  		<option value="select">下拉菜单/选择框(select)</option>
-										  		<option value="radio" selected>单选框(radio)</option>
+										  		<option value="radio">单选框(radio)</option>
 										  		<option value="checkbox">复选框(checkbox)</option>
-										  		<option value="checkboxarray">复选框组(checkboxarray)</option>
+										  		<option value="checkboxarray" selected>复选框组(checkboxarray)</option>
 										  		<option value="textarea">文本区域(textarea)</option>
 										  		<option value="editor">编辑器(editor)</option>
 										  		<option value="thumb">缩略图上传(thumb)</option>
@@ -96,25 +96,25 @@
 							        <div class="form-group">
 								        <label class="control-label col-sm-2">可选值列表：</label>
 								        <div class="col-sm-9">
-									        <textarea class="form-control" rows="7" cols="4" name="args[fieldvalues]" id="fieldvalues">男=男
-女=女</textarea>
+									        <textarea class="form-control" rows="7" cols="4" name="args[fieldvalues]" id="fieldvalues">中国历史（演示）=1
+创伤急救（卫生部第七版《急救学》）=2</textarea>
 									        <span class="help-block">每行一个，等号隔开，如：属性=值;</span>
 								        </div>
 							        </div>
 							        <div class="form-group">
 								        <label class="control-label col-sm-2">默认值：</label>
 								        <div class="col-sm-3">
-								        	<input class="form-control" type="text" size="40" name="args[fielddefault]" class="form-control" id="fielddefault" value="男"/>
+								        	<input class="form-control" type="text" size="40" name="args[fielddefault]" class="form-control" id="fielddefault" value=""/>
 							        	</div>
 							        </div>
 							        <div class="form-group">
 								        <label class="control-label col-sm-2">禁止修改：</label>
 							          	<div class="col-sm-9">
 								          	<label class="checkbox-inline">
-								          		<input type="checkbox" name="args[fieldforbidactors][]" value="-1" /> 本用户
+								          		<input type="checkbox" name="args[fieldforbidactors][]" value="-1" checked="true"/> 本用户
 								          	</label>
 								          									          									          									          									          									          									          	<label class="checkbox-inline">
-								          		<input type="checkbox" name="args[fieldforbidactors][]" value="1" checked="true"/> 管理员								          	</label>
+								          		<input type="checkbox" name="args[fieldforbidactors][]" value="1" /> 管理员								          	</label>
 								          									          								          	</div>
 							        </div>
 							        <div class="form-group">
@@ -127,10 +127,10 @@
 								        <label class="control-label col-sm-2">系统字段：</label>
 							          	<div class="col-sm-9">
 											<label class="radio-inline">
-								          		<input type="radio" class="input-text" name="args[fieldsystem]" value="1" checked/> 作为系统字段
+								          		<input type="radio" class="input-text" name="args[fieldsystem]" value="1"/> 作为系统字段
 								          	</label>
 								          	<label class="radio-inline">
-								          		<input type="radio" class="input-text" name="args[fieldsystem]" value="0"/> 作为普通字段
+								          		<input type="radio" class="input-text" name="args[fieldsystem]" value="0" checked/> 作为普通字段
 								          	</label>
 								          	<span class="help-block">系统字段不能被删除</span>
 								       </div>
@@ -139,8 +139,8 @@
 							        	<label class="control-label col-sm-2"></label>
 							            <div class="col-sm-9">
 								            <button class="btn btn-primary" type="submit">提交</button>
-								            <input type="hidden" name="moduleid" value="9"/>
-								            <input type="hidden" name="fieldid" value="17"/>
+								            <input type="hidden" name="moduleid" value="12"/>
+								            <input type="hidden" name="fieldid" value="7"/>
 								            <input type="hidden" name="modifyfieldhtml" value="1"/>
 							            </div>
 							        </div>
@@ -156,16 +156,16 @@
 										<div class="col-sm-3">
 											<select class="form-control" id="fieldtype" name="args[fieldtype]">
 												<option value="int">整型(int/time)</option>
-												<option value="varchar" selected>0~255字符串型(varchar)</option>
+												<option value="varchar">0~255字符串型(varchar)</option>
 												<option value="decimal">浮点型(decimal)</option>
-												<option value="text">长文字型(text)</option>
+												<option value="text" selected>长文字型(text)</option>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 								        <label class="control-label col-sm-2">字段长度：</label>
 										<div class="col-sm-3">
-											<input type="text" size="16" name="args[fieldlength]" class="form-control" id="fieldlength" value="5"/>
+											<input type="text" size="16" name="args[fieldlength]" class="form-control" id="fieldlength" value=""/>
 										</div>
 									</div>
 									<div class="form-group">
@@ -183,8 +183,8 @@
 										<label class="control-label col-sm-2"></label>
 										<div class="col-sm-9">
 											<button class="btn btn-primary" type="submit">提交</button>
-								            <input type="hidden" name="moduleid" value="9"/>
-								            <input type="hidden" name="fieldid" value="17"/>
+								            <input type="hidden" name="moduleid" value="12"/>
+								            <input type="hidden" name="fieldid" value="7"/>
 								            <input type="hidden" name="modifyfielddata" value="1"/>
 							            </div>
 							        </div>

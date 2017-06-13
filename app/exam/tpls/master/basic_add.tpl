@@ -176,7 +176,6 @@
 			<script src="app/core/styles/js/multiselect.min.js"></script>
 			<script type="text/javascript">
                 $(document).ready(function() {
-                    // make code pretty
                     window.prettyPrint && prettyPrint();
                     $('#undo_redo').multiselect();
                 });
@@ -196,7 +195,6 @@
                 }
 
                 $('#userClass').change(function () {
-//                    alert($(this).val());
                     $.ajax({
                         type: 'get',
                         url: "index.php?user-master-user-getUserByClassId&classid="+$(this).val(),
