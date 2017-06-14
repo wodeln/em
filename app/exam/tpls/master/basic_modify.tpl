@@ -72,6 +72,17 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label for="basicplace" class="control-label col-sm-2">考试地点</label>
+								<div class="col-lg-4" style="width: 70%">
+									<select style="margin-bottom: 8px;" name="args[placeid]"  class="form-control combox" needle="needle" msg="请选择考试地点">
+										<option value="">请选择考试地点</option>
+                                        {x2;tree:$place['data'],place,pid}
+											<option value="{x2;v:place['placeid']}"{x2;if:v:place['placeid']==$basic['placeid']}selected{x2;endif}>{x2;v:place['place']}</option>
+                                        {x2;endtree}
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label for="basicsubjectid" class="control-label col-sm-2">考试学员</label>
 								<div class="col-sm-4" style="width: 70%">
 

@@ -385,11 +385,86 @@ class basic_exam
 		return $this->db->fetch($sql);
 	}
 
+    /**
+	 * 更新教师可控制科目字符串
+     * @param $subjectStr 拼接的科目字符串
+	 * 字符串格式：
+	 * 科目名称1=科目ID1
+	 * 科目名称2=科目ID2
+     */
 	public function updateSubjectStr($subjectStr){
         $sql['sql'] = "UPDATE x2_module_fields SET fieldvalues='".$subjectStr."' WHERE field='teacher_subjects'";
         $sql['v']	= null;
         $this->db->exec($sql);
 	}
+
+    /**
+	 * 获取考试地点列表
+     * @param $page 当前页码
+     * @param int $number 每页显示条目
+     * @param int $args 搜索条件数组
+     * @return array
+     */
+    public function getPlaceList($page,$number = 20,$args = 1)
+    {
+        $page = $page > 0?$page:1;
+        $r = array();
+        $data = array(false,'place',$args,false,"placeid DESC",array(intval($page-1)*$number,$number));
+        $sql = $this->pdosql->makeSelect($data);
+        $r['data'] = $this->db->fetchAll($sql,'placeid');
+        $data = array('count(*) AS number','place',$args);
+        $sql = $this->pdosql->makeSelect($data);
+        $t = $this->db->fetch($sql);
+        $pages = $this->pg->outPage($this->pg->getPagesNumber($t['number'],$number),$page);
+        $r['pages'] = $pages;
+        $r['number'] = $t['number'];
+        return $r;
+    }
+
+    /**
+	 * 添加考试地点
+     * @param $args 表单内容
+     */
+    public function insertPlace($args){
+        $data = array('place',$args);
+        $sql = $this->pdosql->makeInsert($data);
+        $this->db->exec($sql);
+        return $this->db->lastInsertId();
+	}
+
+    /**
+	 * 编辑考试地点
+     * @param $placeid 考试地点ID
+     * @param $args 表单内容
+     */
+    public function modifyPlace($placeid,$args){
+        if(!$args)return false;
+        $data = array('place',$args,array(array('AND',"placeid = :placeid",'placeid',$placeid)));
+        $sql = $this->pdosql->makeUpdate($data);
+        return $this->db->exec($sql);
+    }
+
+    /**
+	 * 根据考试地点ID 获取 考试地点信息
+     * @param $placeid 考试地点ID
+     */
+    public function getPlaceById($placeid){
+        $data = array(false,'place',array(array("AND","placeid = :placeid",'placeid',$placeid)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
+
+    /**
+	 * 根据考场地点ID 删除考场
+     * @param $placeid 考场ID
+     */
+    public function delPlaceById($placeid)
+    {
+        $data = array('place',array(array('AND',"placeid = :placeid",'placeid',$placeid)));
+        $sql = $this->pdosql->makeDelete($data);
+        return $this->db->exec($sql);
+        //return $this->db->affectedRows();
+    }
 }
 
 ?>

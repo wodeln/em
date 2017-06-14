@@ -580,6 +580,8 @@ class action extends app
             $areas = $this->area->getAreaList();
             $userList = $this->basic->getUserListByBasicid($basicid);
             $userClasses = $this->user->getUserClassList(1, 500);
+            $place = $this->basic->getPlaceList(1, 500);
+            $this->tpl->assign('place', $place);
             $this->tpl->assign('userClasses', $userClasses);
             $this->tpl->assign('userList', $userList);
             $this->tpl->assign('areas', $areas);
@@ -778,6 +780,8 @@ class action extends app
             $subjects = $this->basic->getSubjectList();
             $areas = $this->area->getAreaList();
             $userClasses = $this->user->getUserClassList(1, 500);
+            $place = $this->basic->getPlaceList(1, 500);
+            $this->tpl->assign('place', $place);
             $this->tpl->assign('userClasses', $userClasses);
             $this->tpl->assign('areas', $areas);
             $this->tpl->assign('subjects', $subjects);
@@ -814,6 +818,121 @@ class action extends app
         $this->tpl->assign('subjects', $subjects);
         $this->tpl->assign('basics', $basics);
         $this->tpl->display('basic');
+    }
+
+    private function place(){
+        $page = $this->ev->get('page');
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        $page = $page > 1 ? $page : 1;
+        if ($search['keyword']) $args[] = array("AND", "place LIKE :place", 'place', "%{$search['keyword']}%");
+        $place = $this->basic->getPlaceList($page, 10, $args);
+        $this->tpl->assign('place', $place);
+        $this->tpl->assign('search',$search);
+        $this->tpl->assign('u',$u);
+        $this->tpl->assign('page',$page);
+        $this->tpl->display('place');
+    }
+
+    private function addplace(){
+        $page = $this->ev->get('page');
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        if($this->ev->post('insertPlace'))
+        {
+            $args = $this->ev->post('args');
+            $id = $this->basic->insertPlace($args);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?exam-master-basic-place&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }
+        else
+        {
+            $this->tpl->assign('search',$search);
+            $this->tpl->assign('u',$u);
+            $this->tpl->assign('page',$page);
+            $this->tpl->display('addplace');
+        }
+    }
+
+    private function modifyplace()
+    {
+        $page = $this->ev->get('page');
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        $placeid = $this->ev->get('placeid');
+
+        if($this->ev->get('modifyPlace'))
+        {
+            $args = $this->ev->post('args');
+            $this->basic->modifyPlace($placeid,$args);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?exam-master-basic-place&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }
+        else
+        {
+            $place = $this->basic->getPlaceById($placeid);
+            $this->tpl->assign('place', $place);
+            $this->tpl->assign('search',$search);
+            $this->tpl->assign('u',$u);
+            $this->tpl->assign('page',$page);;
+            $this->tpl->display('modifyplace');
+        }
+    }
+
+    private function delplace()
+    {
+        $page = $this->ev->get('page');
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        $placeid = $this->ev->get('placeid');
+        $this->basic->delPlaceById($placeid);
+        $message = array(
+            'statusCode' => 200,
+            "message" => "操作成功",
+            "navTabId" => "",
+            "rel" => "",
+            "callbackType" => "forward",
+            "forwardUrl" => "index.php?exam-master-basic-place&page={$page}{$this->u}"
+        );
+        exit(json_encode($message));
     }
 }
 

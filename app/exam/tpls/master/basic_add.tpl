@@ -71,8 +71,17 @@
 						        <div class="fineuploader" attr-type="thumb" attr-template="pe-template-basicthumb"></div>
 							</div>
 						</div>
-
-
+						<div class="form-group">
+							<label for="basicplace" class="control-label col-sm-2">考试地点</label>
+							<div class="col-lg-4" style="width: 70%">
+								<select style="margin-bottom: 8px;" name="args[placeid]"  class="form-control combox" needle="needle" msg="请选择考试地点">
+									<option value="">请选择考试地点</option>
+                                    {x2;tree:$place['data'],place,pid}
+									<option value="{x2;v:place['placeid']}">{x2;v:place['place']}</option>
+                                    {x2;endtree}
+								</select>
+							</div>
+						</div>
                         <div class="form-group">
                             <label for="basicsubjectid" class="control-label col-sm-2">考试学员</label>
                             <div class="col-sm-4" style="width: 70%">
@@ -108,7 +117,7 @@
                                 </div>
                             </div>
                         </div>
-						<!--<div class="form-group">
+						<div class="form-group">
 							<label for="basicsubjectid" class="control-label col-sm-2">考试科目</label>
 							<div class="col-sm-4">
 								<select class="form-control" id="basicsubjectid" name="args[basicsubjectid]" needle="needle" msg="您必须选择考试科目">
@@ -119,7 +128,7 @@
 						  		</select>
 							</div>
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label for="basicareaid" class="control-label col-sm-2">考试地区</label>
 							<div class="col-sm-4">
 								<select class="form-control" id="basicareaid" name="args[basicareaid]" needle="needle" msg="您必须选择考试地区">
