@@ -159,42 +159,70 @@ class action extends app
 				$handle = fopen($uploadfile,"r");
 				$defaultgroup = $this->user->getDefaultGroup();
 				$strings = $this->G->make('strings');
+
+				$i=1;//计数器
+                $error = array();
 				while ($data = fgetcsv($handle,200))
 				{
+					$e=false;
+					$errorStr="";
+                    $args = array();
 
-				    if($data[0] && $data[1])
+
+				    if($data[0])//用户名为空判断
 				    {
-					    $args = array();
 					    $args['username'] = iconv("GBK","UTF-8",$data[0]);
-					    if($strings->isUserName($args['username']))
-					    {
-						    $u = $this->user->getUserByUserName($args['username']);
-						    if(!$u)
-						    {
-							    $args['useremail'] = $data[1];
-							    if($strings->isEmail($args['useremail']))
-							    {
-								    $u = $this->user->getUserByEmail($args['useremail']);
-								    if(!$u)
-								    {
-								    	if(!$data[2])$data[2] = '111111';
-								    	$args['userpassword'] = md5($data[2]);
-								    	$args['usergroupid'] = $defaultgroup['groupid'];
-								    	$this->user->insertUser($args);
-								    }
-							    }
-						    }
-					    }
-				    }
+					    if(!$strings->isUserName($args['username'])){//用户名格式错误
+                            $errorStr.="用户名格式错误 ";
+							$e=true;
+						}
+
+                        $u = $this->user->getUserByUserName($args['username']);
+                        if($u){//用户名重复
+                            $errorStr.="用户名重复 ";
+                            $e=true;
+						}
+				    }else{
+				    	$errorStr.="用户名为空 ";
+				    	$e=true;
+					}
+
+                    if($strings->isEmail($data[1])){//邮件格式错误判断
+                        $args['useremail'] = $data[1];
+                    }else{
+                        $errorStr.="邮件格式错误 ";
+                        $e=true;
+                    }
+
+                    $userClassName=iconv("GBK","UTF-8",$data[3]);
+                    $userclass = $this->user->getUserClassByName($userClassName);
+                    if($userclass){//是否查找到班级判断
+                        $args['userclassid'] = $userclass['classid'];
+                    }else{
+                        $errorStr.="未找到培训对象名称 ";
+                        $e=true;
+                    }
+
+					if(!$e){
+                        if(!$data[2])$data[2] = '123456';
+                        $args['userpassword'] = md5($data[2]);
+                        $args['usergroupid'] = $defaultgroup['groupid'];
+                        $inserArray[]=$args;
+					}else{
+						$error[$i]=$errorStr;
+					}
+                    $i++;
 				}
 				fclose($handle);
-				$message = array(
-					'statusCode' => 200,
-					"message" => "操作成功",
-				    "callbackType" => "forward",
-				    "forwardUrl" => "index.php?user-master-user"
-				);
-				exit(json_encode($message));
+				if(count($error)>0){
+                    exit(json_encode($error));
+				}else{
+					foreach ($inserArray as $k=>$v){
+                        $this->user->insertUser($v);
+					}
+
+					exit(json_encode(1));
+                }
 			}
 		}
 		else

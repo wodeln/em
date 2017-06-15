@@ -383,6 +383,12 @@ class user_user
 		return $this->db->fetch($sql);
 	}
 
+    public function getUserClassByName($className){
+        $sql['sql'] = "SELECT * FROM x2_user_class WHERE classname='".$className."'";
+        $sql['v']	= null;
+        return $this->db->fetch($sql);
+    }
+
     /**
      * 获取所有 用户群组/班级
      */
