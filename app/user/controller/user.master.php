@@ -164,34 +164,28 @@ class action extends app
                 $error = array();
 				while ($data = fgetcsv($handle,200))
 				{
-					$e=false;
 					$errorStr="";
                     $args = array();
-
 
 				    if($data[0])//用户名为空判断
 				    {
 					    $args['username'] = iconv("GBK","UTF-8",$data[0]);
 					    if(!$strings->isUserName($args['username'])){//用户名格式错误
                             $errorStr.="用户名格式错误 ";
-							$e=true;
 						}
 
                         $u = $this->user->getUserByUserName($args['username']);
                         if($u){//用户名重复
                             $errorStr.="用户名重复 ";
-                            $e=true;
 						}
 				    }else{
 				    	$errorStr.="用户名为空 ";
-				    	$e=true;
 					}
 
                     if($strings->isEmail($data[1])){//邮件格式错误判断
                         $args['useremail'] = $data[1];
                     }else{
                         $errorStr.="邮件格式错误 ";
-                        $e=true;
                     }
 
                     $userClassName=iconv("GBK","UTF-8",$data[3]);
@@ -200,10 +194,9 @@ class action extends app
                         $args['userclassid'] = $userclass['classid'];
                     }else{
                         $errorStr.="未找到培训对象名称 ";
-                        $e=true;
                     }
 
-					if(!$e){
+					if(!strlen($errorStr)){
                         if(!$data[2])$data[2] = '123456';
                         $args['userpassword'] = md5($data[2]);
                         $args['usergroupid'] = $defaultgroup['groupid'];
