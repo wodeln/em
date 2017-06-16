@@ -480,7 +480,7 @@ class action extends app
                     foreach ($knows as $p) {
                         if ($p['knowsid']) $tmpknows .= ',' . $p['knowsid'];
                     }
-                   // $args[] = array("AND", "find_in_set(quest2knows.qkknowsid,:qkknowsid)", 'qkknowsid', $tmpknows);
+                    $args[] = array("AND", "find_in_set(quest2knows.qkknowsid,:qkknowsid)", 'qkknowsid', $tmpknows);
                 } elseif ($search['questionsubjectid']) {
                     $knows = $this->section->getAllKnowsBySubject($search['questionsubjectid']);
                     foreach ($knows as $p) {
@@ -492,7 +492,7 @@ class action extends app
                     foreach ($knows as $p) {
                         if ($p['knowsid']) $tmpknows .= ',' . $p['knowsid'];
                     }
-//                    $args[] = array("AND", "find_in_set(quest2knows.qkknowsid,:qkknowsid)", 'qkknowsid', $tmpknows);
+                    $args[] = array("AND", "find_in_set(quest2knows.qkknowsid,:qkknowsid)", 'qkknowsid', $tmpknows);
                 }
             }
 

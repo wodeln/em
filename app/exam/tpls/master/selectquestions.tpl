@@ -41,7 +41,7 @@
 				        </tr>
 				        <tr>
 							<td>
-						  		知识点：<select name="search[questionsectionid]" class="combox form-control" id="sectionselect" target="knowsselect" refUrl="?exam-master-questions-ajax-getknowsbysectionid&sectionid={value}">
+						  		<select name="search[questionsectionid]" class="combox form-control" id="sectionselect" target="knowsselect" refUrl="?exam-master-questions-ajax-getknowsbysectionid&sectionid={value}">
 							  		<option value="">选择章节</option>
 							  		{x2;if:$sections}
 							  		{x2;tree:$sections,section,sid}

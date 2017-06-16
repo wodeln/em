@@ -52,6 +52,7 @@
 								  	<option value="{x2;v:subject['subjectid']}">{x2;v:subject['subject']}</option>
 								  	{x2;endtree}
 							  	</select>
+								<span class="help-block" style="width: 300px;">请选择科目，以便进行看题、选题操作</span>
 							</div>
 						</div>
 						<div class="form-group">
@@ -98,8 +99,8 @@
 								<span class="info">&nbsp;题，每题&nbsp;</span><input class="form-control" needle="needle" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][score]" value="0" size="2" msg="您必须填写每题的分值"/>
 								<span class="info">&nbsp;分，描述&nbsp;</span><input class="form-control" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][describe]" value="" size="12"/>
 								<span class="info">&nbsp;已选题数：<a id="ialreadyselectnumber_{x2;v:key}">0</a>&nbsp;&nbsp;题</span>
-								<span class="info">&nbsp;<a class="selfmodal btn btn-info" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selected&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}">看题</a></span>
-								<span class="info">&nbsp;<a class="selfmodal btn btn-primary" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selectquestions&search[questionsubjectid]={selectedsubjectid}&search[questiontype]={x2;v:key}&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}&useframe=1" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}|selectedsubjectid">选题</a></span>
+								<span class="info">&nbsp;<a class="selfmodal btn btn-info" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selected&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}" style="display: none;">看题</a></span>
+								<span class="info">&nbsp;<a class="selfmodal btn btn-primary" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selectquestions&search[questionsubjectid]={selectedsubjectid}&search[questiontype]={x2;v:key}&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}&useframe=1" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}|selectedsubjectid"  style="display: none;">选题</a></span>
 			  					<input type="hidden" value="" id="iselectquestions_{x2;v:key}" name="args[examquestions][{x2;v:key}][questions]" />
 			  					<input type="hidden" value="" id="iselectrowsquestions_{x2;v:key}" name="args[examquestions][{x2;v:key}][rowsquestions]" />
 							</div>
@@ -120,8 +121,8 @@
 	</div>
 </div>
 <div id="modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
+	<div class="modal-dialog" style="min-width: 680px;">
+		<div class="modal-content" style="min-width: 680px;">
 			<div class="modal-header">
 				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
 				<h4 id="myModalLabel">
@@ -130,7 +131,7 @@
 			</div>
 			<div class="modal-body" id="modal-body"></div>
 			<div class="modal-footer">
-				 <button aria-hidden="true" class="btn btn-primary" data-dismiss="modal">完成</button>
+				 <p><button aria-hidden="true" class="btn btn-primary" data-dismiss="modal">完成</button></p>
 			</div>
 		</div>
 	</div>
@@ -140,6 +141,14 @@ function loadsubjectsetting(obj)
 {
 	$.getJSON('index.php?exam-master-basic-getsubjectquestype&subjectid='+$(obj).val()+'&'+Math.random(),function(data){$('.questpanel').hide();for(x in data){$('.panel_'+data[x]).show();}});
 }
+$("#selectedsubjectid").change(function () {
+    if($(this).val()!=""){
+        $(".selfmodal").css("display","inline-block");
+	}else {
+        $(".selfmodal").css("display","none");
+	}
+
+});
 </script>
 {x2;include:footer}
 </body>
