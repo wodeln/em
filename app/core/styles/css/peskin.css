@@ -3,7 +3,7 @@ font-size:15px;
 font-family:"Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
 line-height:2em;
 color:#333333;
-background-color:#ebebeb;}
+}
 
 input{
 line-height:2em;}
@@ -237,3 +237,83 @@ font-family:"MV Boli";}
 .cke_dialog_contents input[type="text"]{height:24px;line-height:1em;}
 .thumbuper .swfupload{cursor:pointer;}
 .thumbuper .thumbnail{min-height:150px;}
+
+.more_knowledge{
+    margin: 0 auto;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    color: #4070b2;
+    font-size: 20px;
+}
+
+.subject-video{
+    width: 1100px;
+    margin-left: 30px;
+    padding-left: 20px;
+}
+.video{
+    width: 520px;
+    display: inline-block;
+    min-height: 530px;
+    margin: 0 auto;
+    margin-left: 20px;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius:4px;
+    position:relative;
+}
+.subjec{
+    width: 520px;
+    display: inline-block;
+    margin: 0 auto;
+    min-height: 530px;
+    background-color: #ffffff;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius:4px;
+    position:relative;
+}
+.bottom-s a{
+    height: 50px;
+    line-height: 50px;
+    background-color: #4070b2;
+    width: 160px;
+    text-align: center;
+    color: #ffffff;
+    bottom: 15px;
+    position:absolute;
+    right:10px;
+}
+.title_str{
+    color: #4070b2;
+    font-size: 16px;
+}
+.title_str div{
+    font-size: 25px;
+}
+.main_backimg{
+    background:url(../img/background-img.jpg) repeat-x;
+}
+.sub_backimg{
+    background:url(../img/background-img.jpg) repeat-x;
+    background-size:10px 0px;
+}
+.play_img{
+    width: 100%;
+    height: 70%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    z-index: 2;
+    text-align: center;
+    vertical-align: middle;
+}
+.my-modal-header{
+    border: none;
+}
+.my-modal-header .close{
+    margin-top: -6px;
+}

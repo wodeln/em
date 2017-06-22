@@ -4,22 +4,8 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="main" style="height:450px;overflow:hidden;">
-			<div class="col-xs-2 box itembox" style="width:22%;height:450px;overflow:hidden;">
-				{x2;tree:$coursecats,cat,cid}
-				<h4 class="title">{x2;v:cat['catname']}</h4>
-				{x2;if:$topcourse[v:cat['catid']]}
-				<ul class="list-unstyled list-inline">
-					{x2;tree:$topcourse[v:cat['catid']]['data'],course,crid}
-					<li><a href="index.php?course-app-course&csid={x2;v:course['csid']}">{x2;v:course['cstitle']}</a></li>
-					{x2;endtree}
-				</ul>
-				{x2;endif}
-				{x2;if:v:cid > 6}
-				{x2;eval:break;}
-				{x2;endif}
-				{x2;endtree}
-			</div>
-			<div class="col-xs-10 box split" style="padding:0px;width:78%;">
+
+			<div class="col-xs-10 box split" style="padding:0px;width:100%;">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 					<ol class="carousel-indicators" style="left:90%;bottom:0px;">
@@ -55,66 +41,59 @@
 		</div>
 	</div>
 </div>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="main box itembox">
-			<h4 class="title">视频课程</h4>
-			<div class="col-xs-3" style="padding:0px;">
-				<a href="index.php?course-app" class="">
-					<img src="app/core/styles/img/item2.jpg" alt="" width="287">
-				</a>
-			</div>
-			<div class="col-xs-9" style="padding-left:0px;">
-				{x2;tree:$courses['data'],course,cid}
-				<div class="col-xs-3">
-					<a href="index.php?course-app-course&csid={x2;v:course['csid']}" class="thumbnail ajax">
-						<img src="{x2;v:course['csthumb']}" alt="" width="180">
-					</a>
-					<h5 class="text-center">{x2;v:course['cstitle']}</h5>
-				</div>
-				{x2;if:v:hid == 4}
-				<div class="col-xs-12"><hr /></div>
-				{x2;endif}
-				{x2;endtree}
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid hide">
+
+<!--<div class="container-fluid hide">
 	<div class="row-fluid">
 		<div class="main"><img src="app/core/styles/img/ad.jpg"/></div>
 	</div>
-</div>
-<div class="container-fluid">
+</div>-->
+<div class="container-fluid main_backimg">
 	<div class="row-fluid">
-		<div class="main box itembox">
-			<h4 class="title">热门考场</h4>
-			<div class="col-xs-3" style="padding:0px;">
-				<a href="index.php?exam-app" class="">
-					<img src="app/core/styles/img/item3.jpg" alt="" width="287">
-				</a>
-			</div>
-			<div class="col-xs-9" style="padding-left:0px;">
-				{x2;tree:$basics['basic'],basic,bid}
-				<div class="col-xs-3">
-					<a href="index.php?exam-app-index-setCurrentBasic&basicid={x2;v:basic['basicid']}" class="thumbnail ajax">
-						<img src="{x2;v:basic['basicthumb']}" alt="" width="180">
-					</a>
-					<h5 class="text-center">{x2;v:basic['basic']}</h5>
+		<div class="main box itembox sub_backimg">
+			<div class="more_knowledge">————————————————— 更多知识 —————————————————</div>
+			<div class="subject-video pull-left center-block">
+				<div class="subjec pull-left">
+					<div class="title_str">测试您的<div>知识</div></div>
+					<hr>
+					<div>
+						<div>1999年12月15日，美国正式把巴拿马运河归还给巴拿马政府。此前，美国还在该地设立了一个个什么基地？</div>
+						<div class="choice">
+							<p>A:齐国</p>
+							<p>B:楚国</p>
+							<p>C:燕国</p>
+							<p>D:秦国</p>
+						</div>
+						<div class="selector">
+							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="A" autocomplete="off">A </label>
+							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="B" autocomplete="off">B </label>
+							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="C" autocomplete="off">C </label>
+							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="D" autocomplete="off">D </label>
+						</div>
+					</div>
+					<div class="pull-right bottom-s"><a href="javascript:;" data-toggle="modal" data-target="#modal">我的回答是否正确</a></div>
 				</div>
-				{x2;if:v:hid == 4}
-				<div class="col-xs-12"><hr /></div>
-				{x2;endif}
-				{x2;endtree}
+				<div class="video pull-left" style="position:relative;">
+					<div style="position:relative; z-index:1;">
+						<video style="margin-top:1px;position:relative;" width="100%">
+							<source src="files/attach/images/content/20170602/14963896539784.mp4" type="video/mp4">
+						</video>
+					</div>
+					<a href="javascript:;" data-toggle="modal" data-target="#video_modal">
+						<div class="play_img">
+							<img src="app/core/styles/img/play.png"/>
+						</div>
+					</a>
+					<div class="pull-right bottom-s"><a href="">查看更多视频</a></div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container-fluid hide">
+<!--<div class="container-fluid hide">
 	<div class="row-fluid">
 		<div class="main"><img src="app/core/styles/img/ad2.png"/></div>
 	</div>
-</div>
+</div>-->
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="main">
@@ -142,6 +121,29 @@
 					{x2;endtree}
 				</ul>
 			</div>
+		</div>
+	</div>
+</div>
+<div id="video_modal" class="modal fade">
+	<div class="modal-dialog" style="min-width: 780px;">
+		<div class="modal-content" style="min-width: 780px;">
+			<div class="modal-header my-modal-header">
+				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
+			</div>
+			<video style="margin:7px 10px 10px 7px;" controls="true" width="98%">
+				<source src="files/attach/images/content/20170602/14963896539784.mp4" type="video/mp4">
+			</video>
+		</div>
+	</div>
+</div>
+
+<div id="modal" class="modal fade">
+	<div class="modal-dialog" style="min-width: 680px;">
+		<div class="modal-content" style="min-width: 680px;">
+			<div class="modal-header">
+				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
+			</div>
+
 		</div>
 	</div>
 </div>
