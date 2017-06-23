@@ -71,12 +71,8 @@
                         </div>
 					</div>
 					<div class="pull-right bottom-s">
-
-                       <!-- <a class="selfmodal" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selected&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}">看题</a> -->
-
                        <a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#modal" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number=1">我的回答是否正确</a>
-
-                       </div>
+				    </div>
 				</div>
 				<div class="video pull-left" style="position:relative;">
 					<div style="position:relative; z-index:1;">
