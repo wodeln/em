@@ -83,6 +83,17 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="control-label col-sm-2" for="qrlevel">首页显示：</label>
+							<div class="col-sm-3">
+								<label class="radio-line">
+									<input type="radio" name="args[showhome]" id="userischeck0" value="1" {x2;if:$question['showhome']==1}checked{x2;endif} autocomplete="off"> 是
+								</label>
+								<label class="radio-line">
+									<input type="radio" name="args[showhome]" id="userischeck1" value="0" {x2;if:$question['showhome']==0}checked{x2;endif} autocomplete="off"> 否
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
 						  	<label class="control-label col-sm-2"></label>
 						  	<div class="col-sm-9">
 							  	<button class="btn btn-primary" type="submit">提交</button>

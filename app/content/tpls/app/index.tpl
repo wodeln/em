@@ -56,29 +56,35 @@
 					<div class="title_str">测试您的<div>知识</div></div>
 					<hr>
 					<div>
-						<div>1999年12月15日，美国正式把巴拿马运河归还给巴拿马政府。此前，美国还在该地设立了一个个什么基地？</div>
-						<div class="choice">
-							<p>A:齐国</p>
-							<p>B:楚国</p>
-							<p>C:燕国</p>
-							<p>D:秦国</p>
-						</div>
-						<div class="selector">
-							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="A" autocomplete="off">A </label>
-							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="B" autocomplete="off">B </label>
-							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="C" autocomplete="off">C </label>
-							<label class="radio-inline"><input type="radio" name="question[145]" rel="145" value="D" autocomplete="off">D </label>
-						</div>
+						<div>{x2;realhtml:$question['qrquestion']}</div>
+                        <div>{x2;realhtml:$question['sub'][0]['question']}</div>
+                        <div class="choice">
+                            {x2;realhtml:$question['sub'][0]['questionselect']}
+                        </div>
+                        <div class="selector">
+                            {x2;tree:$selectorder,so,sid}
+                            {x2;if:v:key == $question['sub'][0]['questionselectnumber']}
+                            {x2;eval: break;}
+                            {x2;endif}
+                            <label class="radio-inline"><input type="radio" name="question[{x2;$question['questionid']}]" rel="{x2;$question['questionid']}" value="{x2;v:so}" {x2;if:v:so == $sessionvars['examsessionuseranswer'][$question['questionid']]}checked{x2;endif}/>{x2;v:so} </label>
+                            {x2;endtree}
+                        </div>
 					</div>
-					<div class="pull-right bottom-s"><a href="javascript:;" data-toggle="modal" data-target="#modal">我的回答是否正确</a></div>
+					<div class="pull-right bottom-s">
+
+                       <!-- <a class="selfmodal" href="javascript:;" data-target="#modal" url="index.php?exam-master-exams-selected&questionids={iselectquestions_{x2;v:key}}&rowsquestionids={iselectrowsquestions_{x2;v:key}}" valuefrom="iselectquestions_{x2;v:key}|iselectrowsquestions_{x2;v:key}">看题</a> -->
+
+                       <a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#modal" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number=1">我的回答是否正确</a>
+
+                       </div>
 				</div>
 				<div class="video pull-left" style="position:relative;">
 					<div style="position:relative; z-index:1;">
 						<video style="margin-top:1px;position:relative;" width="100%">
-							<source src="files/attach/images/content/20170602/14963896539784.mp4" type="video/mp4">
+							<source src="{x2;$vedio['course_files']}" type="video/mp4">
 						</video>
 					</div>
-					<a href="javascript:;" data-toggle="modal" data-target="#video_modal">
+					<a class="selfmodal"  href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;$vedio['courseid']}">
 						<div class="play_img">
 							<img src="app/core/styles/img/play.png"/>
 						</div>
@@ -130,9 +136,7 @@
 			<div class="modal-header my-modal-header">
 				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
 			</div>
-			<video style="margin:7px 10px 10px 7px;" controls="true" width="98%">
-				<source src="files/attach/images/content/20170602/14963896539784.mp4" type="video/mp4">
-			</video>
+            <div class="modal-body" id="modal-body"></div>
 		</div>
 	</div>
 </div>
@@ -143,7 +147,7 @@
 			<div class="modal-header">
 				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
 			</div>
-
+            <div class="modal-body" id="modal-body"></div>
 		</div>
 	</div>
 </div>

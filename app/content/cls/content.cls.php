@@ -110,6 +110,41 @@ class content_content
 		$r['next'] = $this->db->fetchAll($sql);
 		return $r;
 	}
+
+    public function getShowHomeQuestion($type){
+//	    $data = array('x2_questionrows',array("AND","showhome = 1"));
+//        $sql = $this->pdosql->makeSelect($data);
+        $sql['sql'] = "SELECT * FROM `x2_questionrows` WHERE showhome=".$type." ORDER BY qrid DESC LIMIT 1;";
+        $sql['v'] = null;
+        return $this->db->fetch($sql);
+
+    }
+
+    public function getSubQuestionsByParentId($parentId){
+		$sql['sql'] = "SELECT * FROM x2_questions WHERE questionparent=".$parentId;
+		$sql['v'] = null;
+		return $this->db->fetchAll($sql);
+	}
+
+	public function getShowHomeQuestionById($qrid){
+        $sql['sql'] = "SELECT * FROM `x2_questionrows` WHERE qrid=".$qrid;
+        $sql['v'] = null;
+        return $this->db->fetch($sql);
+	}
+
+    public function getShowHomeVedio($type){
+//	    $data = array('x2_questionrows',array("AND","showhome = 1"));
+//        $sql = $this->pdosql->makeSelect($data);
+        $sql['sql'] = "SELECT * FROM `x2_course` WHERE coursemoduleid=14 AND course_showhome=".$type." ORDER BY courseid DESC LIMIT 1;";
+        $sql['v'] = null;
+        return $this->db->fetch($sql);
+    }
+
+    public function getShowHomeVedioById($courseid){
+        $sql['sql'] = "SELECT * FROM `x2_course` WHERE courseid=".$courseid;
+        $sql['v'] = null;
+        return $this->db->fetch($sql);
+    }
 }
 
 ?>

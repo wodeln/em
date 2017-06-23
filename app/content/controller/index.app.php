@@ -42,16 +42,59 @@ class action extends app
 			$catstring = $this->category->getChildCategoryString($cat['catid']);
 			$topcourse[$cat['catid']] =  $this->course->getCourseList(array(array("AND","find_in_set(cscatid,:cscatid)",'cscatid',$catstring)),1,6);
 		}
+		$question=$this->content->getShowHomeQuestion(1);
+		if(!$question){
+            $question=$this->content->getShowHomeQuestion(0);
+		}
+		$subQuestions = $this->content->getSubQuestionsByParentId($question["qrid"]);
+		$question['sub'] = $subQuestions;
 		$this->tpl->assign('topcourse',$topcourse);
 		$courses = $this->course->getCourseList(1,1,8);
 		$basic = $this->G->make('basic','exam');
 		$basics = $basic->getBestBasics();
+        $this->selectorder = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $vedio = $this->content->getShowHomeVedio(1);
+        if(!$vedio){
+            $vedio=$this->content->getShowHomeVedio(0);
+        }
+        $this->tpl->assign('vedio',$vedio);
+        $this->tpl->assign('selectorder',$this->selectorder);
+        $this->tpl->assign('question',$question);
 		$this->tpl->assign('coursecats',$coursecats);
 		$this->tpl->assign('courses',$courses);
 		$this->tpl->assign('basics',$basics);
 		$this->tpl->assign('contents',$contents);
 		$this->tpl->display('index');
 	}
+
+    private function showhome(){
+        $questionId = $this->ev->get('questionid');
+        $number = $this->ev->get('number');
+        $question=$this->content->getShowHomeQuestionById($questionId);
+        $subQuestions = $this->content->getSubQuestionsByParentId($question["qrid"]);
+        $question['sub'] = $subQuestions[$number-1];
+        $this->selectorder = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N');
+        $this->tpl->assign('selectorder',$this->selectorder);
+        $this->tpl->assign('allnumber',count($subQuestions));
+        $this->tpl->assign('question',$question);
+        $this->tpl->assign('number',$number);
+
+        $this->tpl->display("showhome");
+    }
+
+    private function showhomevedio(){
+        $courseid = $this->ev->get('courseid');
+        $vedio=$this->content->getShowHomeVedioById($courseid);
+        $this->tpl->assign('vedio',$vedio);
+        $this->tpl->display("showhomevedio");
+    }
+
+   /* private function showTime(){
+    	$question = $this->ev->get('question');
+    	$this->content->getUser($question);
+    	$this->assgin("selectorder",$this->selectactor());
+    	return null;
+	}*/
 }
 
 
