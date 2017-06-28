@@ -160,6 +160,45 @@ class course_course
 		$sql = $this->pdosql->makeSelect($data);
 		return $this->db->fetch($sql);
 	}
+
+    public function getVedioList($args,$page,$number = 20,$order = 'courseid DESC')
+    {
+
+        $data = array(
+            'select' => false,
+            'table' => 'course',
+            'query' => $args,
+            'orderby' => $order
+        );
+        $r = $this->db->listElements($page,$number,$data);
+        return $r;
+    }
+
+    public function addVideo($args){
+        return $this->db->insertElement(array('table' => 'course','query' => $args));
+    }
+
+    public function getVideoById($id)
+    {
+        $data = array(false,'course',array(array('AND',"courseid = :courseid",'courseid',$id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+    }
+
+    public function modifyVideo($id,$args)
+    {
+        $data = array(
+            'table' => 'x2_course',
+            'value' => $args,
+            'query' => array(array('AND',"courseid = :courseid",'courseid',$id))
+        );
+        return $this->db->updateElement($data);
+    }
+
+    public function delVideo($id)
+    {
+        return $this->db->delElement(array('table' => 'course','query' => array(array('AND',"courseid = :courseid",'courseid',$id))));
+    }
 }
 
 ?>

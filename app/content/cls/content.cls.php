@@ -145,6 +145,19 @@ class content_content
         $sql['v'] = null;
         return $this->db->fetch($sql);
     }
+
+    public function getVedioList($args,$page,$number = 20,$order = 'courseid DESC')
+    {
+
+        $data = array(
+            'select' => false,
+            'table' => 'course',
+            'query' => $args,
+            'orderby' => $order
+        );
+        $r = $this->db->listElements($page,$number,$data);
+        return $r;
+    }
 }
 
 ?>

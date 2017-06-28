@@ -80,12 +80,13 @@
 							<source src="{x2;$vedio['course_files']}" type="video/mp4">
 						</video>
 					</div>
-					<a class="selfmodal"  href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;$vedio['courseid']}">
+					<!--<a class="selfmodal"  href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;$vedio['courseid']}">-->
+					<a href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;$vedio['courseid']}">
 						<div class="play_img">
 							<img src="app/core/styles/img/play.png"/>
 						</div>
 					</a>
-					<div class="pull-right bottom-s"><a href="">查看更多视频</a></div>
+					<div class="pull-right bottom-s"><a href="content-app-content-getvideos">查看更多视频</a></div>
 				</div>
 			</div>
 		</div>
