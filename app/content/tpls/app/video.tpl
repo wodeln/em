@@ -14,7 +14,7 @@
 					</video>
 				</div>
 
-				<a href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&amp;courseid={x2;v:video['courseid']}">
+				<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&amp;courseid={x2;v:video['courseid']}">
 					<div class="play_img_list">
 						<img src="app/core/styles/img/play.png">
 					</div>

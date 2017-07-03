@@ -1,29 +1,39 @@
 {x2;include:header}
 <body>
 {x2;include:nav}
-{x2;tree:$catids,cat,cid}
+{x2;tree:$course,course,cid}
 <div class="container-fluid">
 	<div class="row-fluid">
-		<div class="main box itembox">
-			<h4 class="title"><a href="index.php?course-app-category&catid={x2;v:cat['catid']}">{x2;v:cat['catname']}</a></h4>
-			<div class="col-xs-3" style="padding:0px;">
-				<a href="index.php?course-app-category&catid={x2;v:cat['catid']}" class="">
-					<img src="{x2;v:cat['catimg']}" alt="" width="287">
-				</a>
-			</div>
-			<div class="col-xs-9" style="padding-left:0px;">
-				{x2;tree:$contents[v:cat['catid']]['data'],content,cid}
-				<div class="col-xs-3">
-					<a href="index.php?course-app-course&csid={x2;v:content['csid']}" class="thumbnail">
-						<img src="{x2;v:content['csthumb']}" alt="" width="180">
-					</a>
-					<h5 class="text-center">{x2;v:content['cstitle']}</h5>
+		<div class="main box itembox top30 border-bottom">
+			<div class="col-lg-7" style="padding:0px;">
+				<div class="pull-left">
+					<p class="course_title">{x2;v:course['coursetitle']}</p>
+					<div>{x2;realhtml:v:course['coursedescribe']}</div>
 				</div>
-				{x2;if:v:cid % 4 == 0}
-				<div class="col-xs-12"><hr /></div>
-				{x2;endif}
-				{x2;endtree}
 			</div>
+			<div class="pull-right more">
+                {x2;if:v:course['ppt_file']!=''}
+					<a target="_blank" href="ViewerJS/#../{x2;v:course['ppt_file']}">查看详情</a>
+                {x2;endif}
+                {x2;if:v:course['course_files']!=''}
+				<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;v:course['courseid']}">查看详情</a>
+                {x2;endif}
+                {x2;if:v:course['course_files']=='' && v:course['ppt_file']==''}
+					<a target="_blank" href="index.php?course-app-index-gethtmlcourse&courseid={x2;v:course['courseid']}">查看详情</a>
+                {x2;endif}
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="video_modal" class="modal fade">
+	<div class="modal-dialog" style="min-width: 780px;">
+		<div class="modal-content" style="min-width: 780px;">
+			<div class="modal-header my-modal-header">
+				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
+			</div>
+			<div class="modal-body" id="modal-body"></div>
 		</div>
 	</div>
 </div>

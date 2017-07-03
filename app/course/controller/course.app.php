@@ -156,6 +156,13 @@ class action extends app
         $content = $this->content->getCourseById($contentid);
         exit(json_encode($content));
 	}
+
+	private function gethtmlcourse(){
+		$courseid = $this->ev->get('courseid');
+		$course = $this->course->getHtmlCourse($courseid);
+        $this->tpl->assign('course',$course);
+        $this->tpl->display('course_html');
+	}
 }
 
 

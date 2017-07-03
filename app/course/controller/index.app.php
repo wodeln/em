@@ -16,7 +16,7 @@ class action extends app
 		exit;
 	}
 
-	private function index()
+	/*private function index()
 	{
 		$catids = array();
 		$catids['index'] = $this->category->getCategoriesByArgs(array(array("AND","catindex > 0")));
@@ -31,6 +31,12 @@ class action extends app
 		}
 		$this->tpl->assign('catids',$catids['index']);
 		$this->tpl->assign('contents',$contents);
+		$this->tpl->display('index');
+	}*/
+
+	private function index(){
+		$course = $this->course->getCoureseContent();
+		$this->tpl->assign("course",$course);
 		$this->tpl->display('index');
 	}
 }

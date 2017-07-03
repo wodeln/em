@@ -346,3 +346,35 @@ font-family:"MV Boli";}
     font-weight: bold;
     font-size: 18px;
 }
+.course_title{
+    font-weight: bold;
+    font-size: 22px;
+}
+.top30{
+    padding-top: 30px;
+}
+.border-bottom{
+    border-bottom: 1px solid black;
+    position:relative;
+    height: 280px;
+}
+.more a{
+    position:absolute;
+    bottom: 15px;
+    right: 20px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #4070b2;
+    width: 160px;
+    text-align: center;
+    color: #ffffff;
+}
+.exam-list ul{
+    padding-top: 30px;
+    width: 200px;
+    float: left;
+
+}
+.course_content{
+    padding-left: 60px;
+}

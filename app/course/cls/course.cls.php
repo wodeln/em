@@ -199,6 +199,18 @@ class course_course
     {
         return $this->db->delElement(array('table' => 'course','query' => array(array('AND',"courseid = :courseid",'courseid',$id))));
     }
+
+    public function getCoureseContent(){
+    	$sql['sql'] = "SELECT * FROM x2_course WHERE coursecsid!=0";
+    	$sql['v'] = null;
+    	return $this->db->fetchAll($sql);
+	}
+
+	public function getHtmlCourse($courseid){
+    	$sql['sql'] = "SELECT * FROM x2_course WHERE courseid=".$courseid;
+    	$sql['v'] = null;
+    	return $this->db->fetch($sql);
+	}
 }
 
 ?>
