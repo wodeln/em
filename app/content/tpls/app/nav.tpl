@@ -49,7 +49,11 @@
 				<ul class="list-unstyled list-inline">
 					<li class="menu col-xs-1 active"><a href="index.php" class="icon">首页</a></li>
 					<li class="menu col-xs-1"><a href="index.php?course">课程</a></li>
+                    {x2;if:$_user['teacher_subjects']}
+					<li class="menu col-xs-1"><a href="index.php?exam-teach-users">考试</a></li>
+                    {x2;else}
 					<li class="menu col-xs-1"><a href="index.php?exam">考试</a></li>
+					{x2;endif}
 				</ul>
 			</div>
 		</div>
