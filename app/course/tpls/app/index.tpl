@@ -19,7 +19,7 @@
 				<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;v:course['courseid']}">查看详情</a>
                 {x2;endif}
                 {x2;if:v:course['course_files']=='' && v:course['ppt_file']==''}
-					<a target="_blank" href="index.php?course-app-index-gethtmlcourse&courseid={x2;v:course['courseid']}">查看详情</a>
+					<a target="_blank" href="index.php?course-app-course-gethtmlcourse&courseid={x2;v:course['courseid']}">查看详情</a>
                 {x2;endif}
 
 			</div>

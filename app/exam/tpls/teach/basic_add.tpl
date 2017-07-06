@@ -71,13 +71,13 @@
 						        <div class="fineuploader" attr-type="thumb" attr-template="pe-template-basicthumb"></div>
 							</div>
 						</div>
-						<div class="form-group">
+						<!--<div class="form-group">
 							<label for="basicapi" class="control-label col-sm-2">API标识</label>
 							<div class="col-sm-6">
 								<input class="form-control" id="basicapi" name="args[basicapi]" type="text" value="{x2;$basic['basicapi']}" datatype="datatable" max="12" msg="API标识为不超过12字符的英文或数字" />
 								<span class="help-block">API标识用于对外提供接口信息，如果单独使用本系统无须填写</span>
 							</div>
-						</div>
+						</div>-->
 						<div class="form-group">
 							<label for="basicsubjectid" class="control-label col-sm-2">考试科目</label>
 							<div class="col-sm-4">

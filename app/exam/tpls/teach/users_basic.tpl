@@ -59,12 +59,12 @@
 					        	</td>
 					        </tr>
 					        <tr>
-					        	<td>
+					        	<!--<td>
 									API标识：
 								</td>
 								<td>
 									<input class="form-control" name="search[basicapi]" type="text" value="{x2;$search['basicapi']}"/>
-								</td>
+								</td>-->
 								<td>
 									科目：
 								</td>

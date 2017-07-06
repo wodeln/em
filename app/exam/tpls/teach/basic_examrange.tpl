@@ -50,12 +50,12 @@
 					        	<td>
 					        		{x2;$areas[$basic['basicareaid']]['area']}
 					        	</td>
-					        	<td>
+					        	<!--<td>
 									API标识：
 								</td>
 								<td>
 									{x2;$basic['basicapi']}
-								</td>
+								</td>-->
 							</tr>
 						</table>
 						<div class="form-group">
