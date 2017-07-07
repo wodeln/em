@@ -107,7 +107,7 @@
 								<div class="col-sm-9 form-inline">
 									<span class="info">共&nbsp;</span>
 									<input id="iselectallnumber_{x2;v:questype['questid']}" type="text" class="form-control" needle="needle" name="args[examsetting][questype][{x2;v:questype['questid']}][number]" value="0" size="1" msg="您必须填写总题数"/>
-									<span class="info">&nbsp;题，每题&nbsp;</span><input class="form-control" needle="needle" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][score]" value="0" size="1" msg="您必须填写每题的分值"/>
+									<span class="info">&nbsp;题，每题&nbsp;</span><input class="form-control" needle="needle" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][score]" value="" size="1" msg="您必须填写每题的分值"/>
 									<span class="info">&nbsp;分，描述&nbsp;</span><input class="form-control" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][describe]" value="" size="10"/>
 									<span class="info">&nbsp;易&nbsp;</span><input class="form-control" type="text" name="args[examsetting][questype][{x2;v:questype['questid']}][easynumber]" value="0" size="1" msg="您需要填写简单题的数量，最小为0"/>
 			  						<span class="info">&nbsp;中&nbsp;</span><input class="form-control" type="text" needle="needle" name="args[examsetting][questype][{x2;v:questype['questid']}][middlenumber]" value="0" size="1" msg="您需要填写中等难度题的数量，最小为0"/>
