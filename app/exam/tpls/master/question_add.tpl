@@ -83,7 +83,7 @@
 						<div class="form-group" id="selectnumber">
 							<label class="control-label col-sm-2">备选项数量：</label>
 						  	<div class="col-sm-3">
-							  	<select class="form-control" name="args[questionselectnumber]">
+							  	<select id="sele" class="form-control" name="args[questionselectnumber]">
 							  		<option value="0">0</option>
 							  		<option value="2">2</option>
 							  		<option value="3">3</option>

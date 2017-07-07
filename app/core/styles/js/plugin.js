@@ -116,8 +116,9 @@ function setAnswerHtml(t, o) {
     if (parseInt(t) == 0 || parseInt(t) == 5) {
         $("#selectnumber").hide();
         $("#selecttext").hide();
-    }
-    else {
+    }else if(parseInt(t) == 4){
+        $("#sele").find("option[value='2']").attr("selected",true);
+    }else {
         $("#selectnumber").show();
         $("#selecttext").show();
     }
