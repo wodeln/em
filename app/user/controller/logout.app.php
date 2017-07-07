@@ -25,6 +25,7 @@ class action extends app
 			"callbackType" => 'forward',
 			"forwardUrl" => "index.php?".$this->G->defaultApp
 		);
+        session_destroy();
 		$this->G->R($message);
 		exit;
 	}
