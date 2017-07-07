@@ -378,3 +378,6 @@ font-family:"MV Boli";}
 .course_content{
     padding-left: 60px;
 }
+.table .combox{
+    max-width: 200px;
+}
