@@ -832,7 +832,7 @@ class action extends app
             }
         }
         $page = $page > 1 ? $page : 1;
-        if ($search['keyword']) $args[] = array("AND", "place LIKE :place", 'place', "%{$search['keyword']}%");
+        if ($search['place']) $args[] = array("AND", "place LIKE :place", 'place', "%{$search['place']}%");
         $place = $this->basic->getPlaceList($page, 10, $args);
         $this->tpl->assign('place', $place);
         $this->tpl->assign('search',$search);

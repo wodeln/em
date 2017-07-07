@@ -32,7 +32,7 @@
 							</thead>
 							<tr>
 								<td>
-									地点：
+									考试区域：
 								</td>
 								<td class="input">
 									<input name="search[place]" class="form-control" size="25" type="text" value="{x2;$search['place']}"/>
@@ -52,8 +52,8 @@
 						<thead>
 							<tr class="info">
 			                    <th>ID</th>
+						        <th>考试区域</th>
 						        <th>考试地点</th>
-						        <!--<th>备注</th>-->
 								<th>操作</th>
 			                </tr>
 			            </thead>
@@ -62,7 +62,7 @@
 			            	<tr>
 			                    <td>{x2;v:place['placeid']}</td>
 			                    <td>{x2;v:place['place']}</td>
-								<!--<td>{x2;v:place['memo']}</td>-->
+								<td>{x2;v:place['address']}</td>
 								<td>
 									<a class="btn" href="index.php?exam-master-basic-modifyplace&page={x2;$page}&placeid={x2;v:place['placeid']}{x2;$u}" title="修改"><em class="glyphicon glyphglyphicon glyphicon-edit"></em></a>
                                     <a class="btn confirm" href="index.php?exam-master-basic-delplace&placeid={x2;v:place['placeid']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphglyphicon glyphicon-remove"></em></a>
