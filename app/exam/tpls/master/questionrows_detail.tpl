@@ -10,7 +10,7 @@
 			        </tr>
 			        <tr>
 			          <td>所属知识点：</td>
-			          <td>{x2;tree:$question['qrknowsid'],know,kid}{x2;v:know['knows']}{x2;endtree}&nbsp;&nbsp;</td>
+			          <td>{x2;tree:$question['qrknowsid'],know,kid}{x2;v:know['knows']} {x2;endtree}&nbsp;&nbsp;</td>
 			        </tr>
 			        {x2;endif}
 			        <tr>

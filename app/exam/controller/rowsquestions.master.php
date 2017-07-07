@@ -176,7 +176,7 @@ class action extends app
 		}
 		$subject = $this->basic->getSubjectById($sections[0]['sectionsubjectid']);
 		$this->tpl->assign("subject",$subject);
-		$this->tpl->assign("sections",$sections);
+        $this->tpl->assign("sections",array_unique($sections));
 		$this->tpl->assign("question",$question);
 		$this->tpl->display('questionrows_detail');
 	}
