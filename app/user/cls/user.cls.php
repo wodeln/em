@@ -419,7 +419,7 @@ class user_user
 	}
 
 	public function getUserByClassId($classid){
-		$sql['sql'] = "SELECT * FROM x2_user WHERE userclassid=".$classid;
+		$sql['sql'] = "SELECT * FROM x2_user WHERE userclassid=".$classid."AND usergroupid=8";
 		$sql['v']	= null;
 		return $this->db->fetchAll($sql);
 	}
