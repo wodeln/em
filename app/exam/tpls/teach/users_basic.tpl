@@ -46,7 +46,7 @@
 								<td>
 									<input class="form-control" name="search[keyword]" type="text" value="{x2;$search['keyword']}"/>
 								</td>
-								<td>
+								<!--<td>
 									地区：
 								</td>
 					        	<td>
@@ -56,7 +56,9 @@
 								  		<option value="{x2;v:area['areaid']}"{x2;if:v:area['areaid'] == $search['basicareaid']} selected{x2;endif}>{x2;v:area['area']}</option>
 								  		{x2;endtree}
 							  		</select>
-					        	</td>
+					        	</td>-->
+								<td></td>
+								<td></td>
 					        </tr>
 					        <tr>
 					        	<!--<td>
