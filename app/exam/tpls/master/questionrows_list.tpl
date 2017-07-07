@@ -26,7 +26,7 @@
 							<a data-toggle="dropdown" class="btn btn-primary" href="#">添加子试题 <strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
 								<li><a href="index.php?{x2;$_app}-master-rowsquestions-addchildquestion&questionid={x2;$questionparent}&page={x2;$page}{x2;$u}">单题添加</a></li>
-								<li><a href="index.php?{x2;$_app}-master-rowsquestions-bataddchildquestion&questionid={x2;$questionparent}&page={x2;$page}{x2;$u}">批量添加</a></li>
+								<!--<li><a href="index.php?{x2;$_app}-master-rowsquestions-bataddchildquestion&questionid={x2;$questionparent}&page={x2;$page}{x2;$u}">批量添加</a></li>-->
 							</ul>
 						</span>
 					</h4>
