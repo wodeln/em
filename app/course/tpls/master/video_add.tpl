@@ -31,7 +31,13 @@
 							    <input class="form-control" type="text" id="coursetitle" name="args[coursetitle]" needle="needle" msg="您必须输入名称">
 					        </div>
 				        </div>
-
+						<div class="form-group">
+							<label for="course_showhome" class="control-label col-sm-2">首页显示</label>
+							<div class="col-sm-9">
+								<label class="radio-line"><input type="radio" name="args[course_showhome]" id="course_showhome0" value="1" autocomplete="off"> 是</label>
+								<label class="radio-line"><input type="radio" name="args[course_showhome]" id="course_showhome1" value="0" checked autocomplete="off"> 否</label>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="course_files" class="control-label col-sm-2">视频文件</label>
 							<div class="col-sm-9">

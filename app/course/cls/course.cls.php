@@ -188,7 +188,7 @@ class course_course
     public function modifyVideo($id,$args)
     {
         $data = array(
-            'table' => 'x2_course',
+            'table' => 'course',
             'value' => $args,
             'query' => array(array('AND',"courseid = :courseid",'courseid',$id))
         );
