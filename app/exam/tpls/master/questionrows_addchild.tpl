@@ -35,7 +35,7 @@
 							  		{x2;endtree}
 							  	</select>
 							</div>
-							<input type="hidden" name="args[questiontype]" value="{x2;$question['qrtype']}">
+							<input type="hidden" id="questiontype" name="args[questiontype]" value="{x2;$question['qrtype']}">
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2">题干：</label>
@@ -153,5 +153,10 @@
 </div>
 {x2;include:footer}
 </body>
+<script type="text/javascript">
+    $(function () {
+        setAnswerHtml($(this).find('option:selected').attr('rel'),'rcianswerbox');
+    });
+</script>
 </html>
 {x2;endif}
