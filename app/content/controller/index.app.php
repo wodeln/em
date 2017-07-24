@@ -89,6 +89,20 @@ class action extends app
         $this->tpl->display("showhomevedio");
     }
 
+	private function test(){
+    	$a=$this->ev->get("a");
+    	$b=$this->ev->post("a");
+
+        exit(json_encode($_POST));
+//    	if($a!=""){
+//            $a.=1;
+//            exit(json_encode($a));
+//		}else{
+//            $b.=2;
+//            exit(json_encode($b));
+//		}
+
+	}
    /* private function showTime(){
     	$question = $this->ev->get('question');
     	$this->content->getUser($question);

@@ -23,10 +23,14 @@
 				<table class="table table-hover table-bordered">
 					<tr class="info"><td colspan="6">{x2;v:section['section']}</td></tr>
 					<tr>
-						{x2;tree:$basic['basicknows'][v:section['sectionid']],know,kid}
-				    	<td><a href="index.php?route=exam-app-lesson-lessonnumber&knowsid={x2;v:know}" target="lessonknows" class="ajax" onclick="javascript:$('#submodal').modal('show');">{x2;$knows[v:know]['knows']}</a></td>
+						<td>
+                        {x2;tree:$knows,know,kid}
+							{x2;if:v:know['sectionid']==v:section['sectionid']}
+								<a href="index.php?route=exam-app-lesson-lessonnumber&knowsid={x2;v:know['knowsid']}" target="lessonknows" class="ajax" onclick="javascript:$('#submodal').modal('show');">{x2;v:know['knows']}</a>
+							{x2;endif}
 				    	{x2;if:v:kid % 6 == 0}</tr><tr>{x2;endif}
 				    	{x2;endtree}
+						</td>
 				    	{x2;if:(v:kid % 6 != 0) && (v:kid/6 >= 1)}
 				    	{x2;eval: v:mod = 6 - v:kid % 6;}
 				    	<td colspan="{x2;v:mod}"></td>
