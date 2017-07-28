@@ -1,7 +1,6 @@
 html,body{
 font-size:15px;
 font-family:"Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
-line-height:2em;
 color:#333333;
 }
 
@@ -45,7 +44,7 @@ margin-bottom:0px;}
 padding:1px 16px 0px 16px;
 text-align:center;
 margin:0px 15px;
-cursor:pointer;}
+cursor:heartpointer;}
 
 .navbar li.menu a,.navs li.menu a{
 line-height:4em;
@@ -235,7 +234,7 @@ font-family:"MV Boli";}
 .thumbuper .second,.thumbuper .second2{position:absolute;width: 16px; height: 16px;bottom:32px;right:18px;z-index:999;}
 .thumbuper .second2{top:16px;}
 .cke_dialog_contents input[type="text"]{height:24px;line-height:1em;}
-.thumbuper .swfupload{cursor:pointer;}
+.thumbuper .swfupload{cursor:heartpointer;}
 .thumbuper .thumbnail{min-height:150px;}
 
 .more_knowledge{
@@ -381,3 +380,440 @@ font-family:"MV Boli";}
 .table .combox{
     max-width: 200px;
 }
+.pad{
+    padding:10px 0 10px 10px;
+}
+
+/*心音开始*/
+.bottom-border{border-bottom: 1px solid #cccccc; width: 100%;color: black;}
+.voice{
+    list-style: none;
+    padding: 0;
+}
+.vposition{
+    width: 190px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+.volume{
+    width: 170px;
+    text-align: center;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+.volume input{
+    width: 50px;
+    height: 25px;
+}
+.heart_bak_img{
+    display: block;
+    width: 400px;
+    height: 450px;
+    background:url(../img/heart.jpg) no-repeat;
+    background-size:400px;
+    position: relative;
+}
+ul.voice{
+    padding-bottom: 15px;
+}
+.left{
+    margin-right: 100px;
+}
+#heartpoint1{
+    position: absolute;
+    top:230px;
+    left: 250px;
+    width: 11px;
+    display: none;
+}
+#heartpoint2{
+    position: absolute;
+    top:143px;
+    left: 220px;
+    width: 11px;
+    display: none;
+}
+#heartpoint3{
+    position: absolute;
+    top:142px;
+    left: 174px;
+    width: 11px;
+    display: none;
+}
+#heartpoint4{
+    position: absolute;
+    top:175px;
+    left: 223px;
+    width: 11px;
+    display: none;
+}
+#heartpoint5{
+    position: absolute;
+    top:232px;
+    left: 215px;
+    width: 11px;
+    display: none;
+}
+#heartpoint6{
+    position: absolute;
+    top:207px;
+    left: 220px;
+    width: 11px;
+    display: none;
+}
+#heartpoint7{
+    position: absolute;
+    top:224px;
+    left: 234px;
+    width: 11px;
+    display: none;
+}
+#heartpoint8{
+    position: absolute;
+    top:218px;
+    left: 256px;
+    width: 11px;
+    display: none;
+}
+.str{
+    color: #2aabd2;
+    padding: 15px 0 10px 0;
+}
+/*心音结束*/
+
+/*呼吸音开始*/
+.lung_positions{
+    width: 100px;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+}
+.lung_position{
+    width: 140px;
+    display: inline-block;
+}
+#lung_modal{
+    padding: 0;
+    margin: 0;
+}
+#lung_modal li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.modal_position{
+    display: inline-block;
+    width: 70px;
+    text-align: left;
+}
+.modal_volume{
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    display: inline-block;
+}
+.modal_volume input{
+    height: 25px;
+    width: 40px;
+}
+.lung_model_position{
+    height: 40px;
+    line-height: 40px;
+}
+#lung_modal_bak_img{
+    width: 650px;
+    height: 350px;
+    background:url(../img/lung_heart.jpg) no-repeat;
+    background-size:650px;
+    position: relative;
+}
+#lung_modal_bak_img img{
+    display: none;
+}
+.lung_bak_img{
+    display: block;
+    width: 650px;
+    height: 380px;
+    background:url(../img/lung_heart.jpg) no-repeat;
+    background-size:650px;
+    position: relative;
+    margin-top: 40px;
+}
+.lung_bak_img img{
+    display: none;
+}
+.lung_left{
+    margin:0px;
+}
+#lung{
+    height: 350px;
+}
+#lung_dialog{
+    width: 840px;
+}
+.lungPoint7{
+    position: absolute;
+    width: 10px;
+    top:102px;
+    left:139px;
+}
+.lungPoint8{
+    position: absolute;
+    width: 10px;
+    top:91px;
+    left:139px;
+}
+.lungPoint9{
+    position: absolute;
+    width: 10px;
+    top:79px;
+    left:136px;
+}
+.lungPoint10{
+    position: absolute;
+    width: 10px;
+    top:67px;
+    left:135px;
+}
+.lungPoint12{
+    position: absolute;
+    width: 8px;
+    top:177px;
+    left:208px;
+}
+.lungPoint13{
+    position: absolute;
+    width: 8px;
+    top:175px;
+    left:219px;
+}
+.lungPoint14{
+    position: absolute;
+    width: 8px;
+    top:170px;
+    left:230px;
+}
+.lungPoint15{
+    position: absolute;
+    width: 8px;
+    top:165px;
+    left:240px;
+}
+.lungPoint17{
+    position: absolute;
+    width: 11px;
+    top:51px;
+    left:107px;
+}
+.lungPoint18{
+    position: absolute;
+    width: 11px;
+    top:84px;
+    left:110px;
+}
+.lungPoint19{
+    position: absolute;
+    width: 11px;
+    top:103px;
+    left:103px;
+}
+.lungPoint20{
+    position: absolute;
+    width: 11px;
+    top:135px;
+    left:94px;
+}
+.lungPoint21{
+    position: absolute;
+    width: 11px;
+    top:145px;
+    left:130px;
+}
+.lungPoint22{
+    position: absolute;
+    width: 11px;
+    top:113px;
+    left:125px;
+}
+.lungPoint23{
+    position: absolute;
+    width: 11px;
+    top:125px;
+    left:132px;
+}
+.lungPoint24{
+    position: absolute;
+    width: 11px;
+    top:97px;
+    left:190px;
+}
+.lungPoint25{
+    position: absolute;
+    width: 11px;
+    top:85px;
+    left:211px;
+}
+.lungPoint26{
+    position: absolute;
+    width: 11px;
+    top:51px;
+    left:160px;
+}
+.lungPoint27{
+    position: absolute;
+    width: 11px;
+    top:51px;
+    left:205px;
+}
+.lungPoint28{
+    position: absolute;
+    width: 11px;
+    top:94px;
+    left:175px;
+}
+.lungPoint29{
+    position: absolute;
+    width: 11px;
+    top:144px;
+    left:208px;
+}
+.lungPoint30{
+    position: absolute;
+    width: 11px;
+    top:112px;
+    left:224px;
+}
+.lungPoint31{
+    position: absolute;
+    width: 11px;
+    top:133px;
+    left:231px;
+}
+.lungPoint32{
+    position: absolute;
+    width: 11px;
+    top:193px;
+    left:233px;
+}
+.lungPoint33{
+    position: absolute;
+    width: 11px;
+    top:192px;
+    left:245px;
+}
+.lungPoint34{
+    position: absolute;
+    width: 16px;
+    top:209px;
+    left:397px;
+}
+.lungPoint35{
+    position: absolute;
+    width: 18px;
+    top:40px;
+    left:478px;
+}
+.lungPoint36{
+    position: absolute;
+    width: 18px;
+    top:69px;
+    left:439px;
+}
+.lungPoint37{
+    position: absolute;
+    width: 21px;
+    top:101px;
+    left:454px;
+}
+.lungPoint38{
+    position: absolute;
+    width: 21px;
+    top:150px;
+    left:452px;
+}
+.lungPoint39{
+    position: absolute;
+    width: 18px;
+    top:197px;
+    left:420px;
+}
+.lungPoint40{
+    position: absolute;
+    width: 18px;
+    top:219px;
+    left:420px;
+}
+.lungPoint41{
+    position: absolute;
+    width: 22px;
+    top:192px;
+    left:450px;
+}
+.lungPoint42{
+    position: absolute;
+    width: 18px;
+    top:69px;
+    left:518px;
+}
+.lungPoint43{
+    position: absolute;
+    width: 21px;
+    top:101px;
+    left:498px;
+}
+.lungPoint44{
+    position: absolute;
+    width: 21px;
+    top:150px;
+    left:501px;
+}
+.lungPoint45{
+    position: absolute;
+    width: 22px;
+    top:192px;
+    left:502px;
+}
+.lungPoint46{
+    position: absolute;
+    width: 18px;
+    top:197px;
+    left:537px;
+}
+.lungPoint47{
+    position: absolute;
+    width: 18px;
+    top:219px;
+    left:537px;
+}
+.lungPoint48{
+    position: absolute;
+    width: 11px;
+    top:164px;
+    left:70px;
+}
+.lungPoint49{
+    position: absolute;
+    width: 15px;
+    top:224px;
+    left:561px;
+}
+.lungPoint50{
+    position: absolute;
+    width: 11px;
+    top:180px;
+    left:71px;
+}
+.lungPoint51{
+    position: absolute;
+    width: 13px;
+    top:159px;
+    left:88px;
+}
+
+.lung_sect_select{
+    -webkit-appearance:none;
+    background-color: #2aabd2;
+}
+/*呼吸音结束*/
