@@ -815,5 +815,7 @@ ul.voice{
 .lung_sect_select{
     -webkit-appearance:none;
     background-color: #2aabd2;
+    border:1px solid black;
+    padding:3px 3px 3px 3px;
 }
 /*呼吸音结束*/

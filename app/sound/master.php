@@ -19,6 +19,7 @@ class app
 		$this->module = $this->G->make('module');
 		$this->apps = $this->G->make('apps','core');
 		$this->user = $this->G->make('user','user');
+        $this->sound = $this->G->make('sound','sound');
 		$this->_user = $_user = $this->session->getSessionUser();
 		$group = $this->user->getGroupById($_user['sessiongroupid']);
 		if($group['groupid'] != 1)

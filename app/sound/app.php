@@ -18,6 +18,7 @@ class app
 		$this->files = $this->G->make('files');
 		$this->session = $this->G->make('session');
         $this->user = $this->G->make('user','user');
+        $this->sound = $this->G->make('sound','sound');
 
 
 		$this->category = $this->G->make('category');
