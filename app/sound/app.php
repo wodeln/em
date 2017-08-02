@@ -19,7 +19,7 @@ class app
 		$this->session = $this->G->make('session');
         $this->user = $this->G->make('user','user');
         $this->sound = $this->G->make('sound','sound');
-
+        $this->discern = $this->G->make('discern','discern');
 
 		$this->category = $this->G->make('category');
 		$this->course = $this->G->make('course','course');
