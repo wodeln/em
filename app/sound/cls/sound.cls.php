@@ -20,9 +20,14 @@ class sound_sound
 		$this->session = $this->G->make('session');
 	}
 
-    public function getCaseByNameType($case_name,$case_type)
+    public function getCaseByNameType($case_name,$case_type,$case_id=null)
     {
-        $data = array(false,array('case1'),array(array('AND',"case_name = :case_name",'case_name',$case_name),array('AND',"case_type = :case_type",'case_type',$case_type)));
+    	if($case_id==null){
+            $data = array(false,array('case1'),array(array('AND',"case_name = :case_name",'case_name',$case_name),array('AND',"case_type = :case_type",'case_type',$case_type)));
+		}else{
+            $data = array(false, array('case1'), array(array('AND',"case_name = :case_name",'case_name',$case_name), array('AND',"case_type = :case_type",'case_type',$case_type), array('AND',"case_id != :case_id",'case_id',$case_id)));
+		}
+
         $sql = $this->pdosql->makeSelect($data);
         return $this->db->fetch($sql,'case');
     }
@@ -45,6 +50,23 @@ class sound_sound
 
 	}
 
+    public function updateCase($args,$soundPositions,$case_id){
+        $data = array('case1',$args,array(array('AND',"case_id = :case_id",'case_id',$case_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+		$this->delPositionByCaseId($case_id);
+        foreach ($soundPositions["play_position"] as $k=>$v){
+            $soundPosition = array();
+            $soundPosition['case_id'] =$case_id;
+            $soundPosition['play_position'] = $v;
+            $soundPosition['sound_volume'] = $soundPositions['sound_volume'][$k];
+            $data = array("case_position",$soundPosition);
+            $sql = $this->pdosql->makeInsert($data);
+            $this->db->exec($sql);
+        }
+
+    }
+
     public function getCaseList($page,$number = 20,$args = 1)
     {
         $page = $page > 0?$page:1;
@@ -66,7 +88,17 @@ class sound_sound
         return $r;
     }
 
+    public function getCaseById($case_id){
+        $data = array(false,array('case1'),array(array('AND',"case_id = :case_id",'case_id',$case_id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
 
+	public function getPositionByCaseId($case_id){
+        $data = array(false,array('case_position'),array(array('AND',"case_id = :case_id",'case_id',$case_id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetchAll($sql);
+	}
 
 
 
@@ -608,6 +640,12 @@ class sound_sound
 	**/
 
 	//public function
+
+	private function delPositionByCaseId($case_id){
+		$sql['sql'] = "DELETE FROM x2_case_position WHERE case_id=".$case_id;
+		$sql['v'] = null;
+		$this->db->exec($sql);
+	}
 }
 
 ?>

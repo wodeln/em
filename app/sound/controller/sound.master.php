@@ -79,6 +79,68 @@ class action extends app
         exit(json_encode($message));
     }
 
+    private function heartedit()
+    {
+        $case_id = $this->ev->get('case_id');
+        $page = $this->ev->get('page');
+        if($this->ev->get('modifyHeart')) {
+            $args = $this->ev->post('args');
+            $soundPositions["play_position"] = $this->ev->post('position');
+            $soundPositions["sound_volume"] = $this->ev->post('volume');
+            $caseByNameType = $this->sound->getCaseByNameType($args['case_name'], $args['case_type'],$case_id);
+            if ($caseByNameType) {
+                $errmsg = "该分类下已有 " . $args['case_name'] . " 病例";
+            }
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->sound->updateCase($args,$soundPositions,$case_id);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?sound-master-sound-custom&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }
+        else {
+            $case = $this->sound->getCaseById($case_id);
+            $casePositionTemp = $this->sound->getPositionByCaseId($case_id);
+            $casePosition = "";
+            for($i=1;$i<9;$i++){
+                $casePosition[$i]["checked"]=0;
+                $casePosition[$i]["volume"]="";
+            }
+
+            for($i=1;$i<9;$i++){
+                foreach ($casePositionTemp as $v){
+                    if($v['play_position'] == $i){
+                        $casePosition[$i]["checked"]=1;
+                        $casePosition[$i]["volume"]=$v['sound_volume'];
+                        continue;
+                    }
+                }
+            }
+            $this->tpl->assign('case',$case);
+            $this->tpl->assign('casePosition',$casePosition);
+            $this->tpl->assign('page',$page);
+            $this->tpl->display('heartedit');
+        }
+    }
+
     private function lungadd(){
         $args = $this->ev->post('args');
         $lungPosition = Array();

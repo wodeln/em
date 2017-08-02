@@ -114,8 +114,8 @@
 									</td>
 									<td class="actions">
 										<div class="btn-group">
-											<a class="btn" href="index.php?content-master-contents-edit&catid={x2;v:content['contentcatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
-											<a class="btn confirm" href="index.php?content-master-contents-del&catid={x2;v:content['cncatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphicon-remove"></em></a>
+											<a class="btn" href="{x2;if:v:case['organ_type']==0}index.php?sound-master-sound-heartedit{x2;endif}{x2;if:v:case['organ_type']==1}index.php?sound-master-sound-lungedit{x2;endif}&case_id={x2;v:case['case_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
+											<a class="btn confirm" href="index.php?sound-master-sound-del&case_id={x2;v:case['case_id']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphicon-remove"></em></a>
 										</div>
 									</td>
 								</tr>
