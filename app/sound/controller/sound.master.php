@@ -69,7 +69,7 @@ class action extends app
                 $u .= "&search[{$key}]={$arg}";
             }
         }
-        $this->sound->insertCase($args,$soundPositions);
+        $this->sound->insertHeartCase($args,$soundPositions);
         $message = array(
             'statusCode' => 200,
             "message" => "操作成功",
@@ -143,16 +143,12 @@ class action extends app
 
     private function lungadd(){
         $args = $this->ev->post('args');
-        $lungPosition = Array();
-        $lungVolume = Array();
+        $page = $this->ev->post('page');
         foreach ($this->ev->post('lungposition') as $k=>$v){
-            $lungPosition = array_merge_recursive($lungPosition,explode(',',$v));
+            $soundPositions[$this->ev->post('sid')[$k]]['position'] = $v;
+            $soundPositions[$this->ev->post('sid')[$k]]['volume'] = $this->ev->post('lungvolume')[$k];
+
         }
-        foreach ($this->ev->post('lungvolume') as $k=>$v){
-            $lungVolume = array_merge_recursive($lungVolume,explode(',',$v));
-        }
-        $soundPositions["play_position"] = $lungPosition;
-        $soundPositions["sound_volume"] = $lungVolume;
         $caseByNameType = $this->sound->getCaseByNameType($args['case_name'], $args['case_type']);
         if ($caseByNameType) {
             $errmsg = "该分类下已有 " . $args['case_name'] . " 病例";
@@ -173,7 +169,7 @@ class action extends app
                 $u .= "&search[{$key}]={$arg}";
             }
         }
-        $this->sound->insertCase($args,$soundPositions);
+        $this->sound->insertLungCase($args,$soundPositions);
         $message = array(
             'statusCode' => 200,
             "message" => "操作成功",
@@ -181,6 +177,65 @@ class action extends app
             "forwardUrl" => "index.php?sound-master-sound-custom&page={$page}{$this->u}"
         );
         exit(json_encode($message));
+    }
+
+    private function lungedit()
+    {
+        $case_id = $this->ev->get('case_id');
+        $page = $this->ev->get('page');
+        if($this->ev->get('modifyLung')) {
+            $args = $this->ev->post('args');
+            foreach ($this->ev->post('lungposition') as $k=>$v){
+                $soundPositions[$this->ev->post('sid')[$k]]['position'] = $v;
+                $soundPositions[$this->ev->post('sid')[$k]]['volume'] = $this->ev->post('lungvolume')[$k];
+            }
+            $caseByNameType = $this->sound->getCaseByNameType($args['case_name'], $args['case_type'], $case_id);
+            if ($caseByNameType) {
+                $errmsg = "该分类下已有 " . $args['case_name'] . " 病例";
+            }
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->sound->updateLungCase($args,$soundPositions,$case_id);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?sound-master-sound-custom&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }
+        else {
+            $case = $this->sound->getCaseById($case_id);
+            $casePositionTemp = $this->sound->getPositionByCaseId($case_id);
+            foreach ($casePositionTemp as $k=>$v){
+                $casePosition[$v['sid']]['lungposition'][$k] = $v['play_position'];
+                $casePosition[$v['sid']]['lungvolume'][$k] = $v['sound_volume'];
+            }
+
+            foreach ($casePosition as $k=>$v){
+                $casePosition[$k]['lungposition'] = implode(",",$v['lungposition']);
+                $casePosition[$k]['lungvolume'] = implode(",",$v['lungvolume']);
+            }
+
+            $this->tpl->assign('case',$case);
+            $this->tpl->assign('casePosition',$casePosition);
+            $this->tpl->assign('page',$page);
+            $this->tpl->display('lungedit');
+        }
     }
 
     private function customadd()

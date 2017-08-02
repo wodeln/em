@@ -32,7 +32,7 @@ class sound_sound
         return $this->db->fetch($sql,'case');
     }
 
-	public function insertCase($args,$soundPositions){
+	public function insertHeartCase($args,$soundPositions){
 
         $data = array('case1',$args);
         $sql = $this->pdosql->makeInsert($data);
@@ -49,6 +49,49 @@ class sound_sound
 		}
 
 	}
+
+    public function insertLungCase($args,$soundPositions){
+
+        $data = array('case1',$args);
+        $sql = $this->pdosql->makeInsert($data);
+        $this->db->exec($sql);
+        $caseId = $this->db->lastInsertId();
+        foreach ($soundPositions as $k=>$v){
+            $position = explode(",",$v['position']);
+            $volume = explode(",",$v['volume']);
+            foreach ($position as $key=>$value){
+                $soundPosition['case_id'] =$caseId;
+                $soundPosition['play_position'] = $value;
+                $soundPosition['sound_volume'] = $volume[$key];
+                $soundPosition['sid'] = $k;
+                $data = array("case_position",$soundPosition);
+                $sql = $this->pdosql->makeInsert($data);
+                $this->db->exec($sql);
+            }
+        }
+
+    }
+
+    public function updateLungCase($args,$soundPositions,$case_id){
+        $data = array('case1',$args,array(array('AND',"case_id = :case_id",'case_id',$case_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+        $this->delPositionByCaseId($case_id);
+        foreach ($soundPositions as $k=>$v){
+            $position = explode(",",$v['position']);
+            $volume = explode(",",$v['volume']);
+            foreach ($position as $key=>$value){
+                $soundPosition['case_id'] =$case_id;
+                $soundPosition['play_position'] = $value;
+                $soundPosition['sound_volume'] = $volume[$key];
+                $soundPosition['sid'] = $k;
+                $data = array("case_position",$soundPosition);
+                $sql = $this->pdosql->makeInsert($data);
+                $this->db->exec($sql);
+            }
+        }
+
+    }
 
     public function updateCase($args,$soundPositions,$case_id){
         $data = array('case1',$args,array(array('AND',"case_id = :case_id",'case_id',$case_id)));
