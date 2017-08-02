@@ -20,6 +20,27 @@ class action extends app
 
     private function custom()
     {
+        $page = $this->ev->get('page')?$this->ev->get('page'):1;
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        $args[]=array('AND',"system_custom = :system_custom",'system_custom',1);
+        if(strlen($search['case_type']))$args[] = array('AND',"case_type = :case_type",'case_type',$search['case_type']);
+        if(strlen($search['case_name']))$args[] = array('AND',"case_name LIKE :case_name",'case_name','%'.$search['case_name'].'%');
+        if(strlen($search['organ_type']))$args[] = array('AND',"organ_type = :organ_type",'organ_type',$search['organ_type']);
+
+        $cases = $this->sound->getCaseList($page,10,$args);
+        $this->tpl->assign('cases',$cases);
+        $this->tpl->assign('search',$search);
+        $this->tpl->assign('u',$u);
+        $this->tpl->assign('page',$page);
+
         $this->tpl->display('custom');
     }
 

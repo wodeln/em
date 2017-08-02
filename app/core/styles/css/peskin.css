@@ -421,56 +421,56 @@ ul.voice{
 .left{
     margin-right: 100px;
 }
-#heartpoint1{
+.heartpoint1{
     position: absolute;
     top:230px;
     left: 250px;
     width: 11px;
     display: none;
 }
-#heartpoint2{
+.heartpoint2{
     position: absolute;
     top:143px;
     left: 220px;
     width: 11px;
     display: none;
 }
-#heartpoint3{
+.heartpoint3{
     position: absolute;
     top:142px;
     left: 174px;
     width: 11px;
     display: none;
 }
-#heartpoint4{
+.heartpoint4{
     position: absolute;
     top:175px;
     left: 223px;
     width: 11px;
     display: none;
 }
-#heartpoint5{
+.heartpoint5{
     position: absolute;
     top:232px;
     left: 215px;
     width: 11px;
     display: none;
 }
-#heartpoint6{
+.heartpoint6{
     position: absolute;
     top:207px;
     left: 220px;
     width: 11px;
     display: none;
 }
-#heartpoint7{
+.heartpoint7{
     position: absolute;
     top:224px;
     left: 234px;
     width: 11px;
     display: none;
 }
-#heartpoint8{
+.heartpoint8{
     position: absolute;
     top:218px;
     left: 256px;
@@ -817,5 +817,17 @@ ul.voice{
     background-color: #2aabd2;
     border:1px solid black;
     padding:3px 3px 3px 3px;
+}
+
+.sound{
+    background: url(../img/sound_static.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    background-size:20px;
+    margin-top: 5px;
+}
+.sound:hover{
+    background: url(../img/sound.gif) no-repeat;
+    background-size:20px;
 }
 /*呼吸音结束*/

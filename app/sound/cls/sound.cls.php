@@ -45,6 +45,33 @@ class sound_sound
 
 	}
 
+    public function getCaseList($page,$number = 20,$args = 1)
+    {
+        $page = $page > 0?$page:1;
+        $r = array();
+        $data = array(false,'case1',$args,false,'case_id DESC',array(intval($page-1)*$number,$number));
+        $sql = $this->pdosql->makeSelect($data);
+        $r['data'] = $this->db->fetchALL($sql,false,'caseinfo');
+        foreach ($r['data'] as $k=>$v){
+        	$data = array(false,'case_position',array(array('AND',"case_id = :case_id",'case_id',$v['case_id'])));
+            $sql = $this->pdosql->makeSelect($data);
+            $r['data'][$k]['positions'] = $this->db->fetchALL($sql);
+		}
+        $data = array('COUNT(*) AS number','case1',$args,false,false,false);
+        $sql = $this->pdosql->makeSelect($data);
+        $tmp = $this->db->fetch($sql);
+        $r['number'] = $tmp['number'];
+        $pages = $this->pg->outPage($this->pg->getPagesNumber($tmp['number'],$number),$page);
+        $r['pages'] = $pages;
+        return $r;
+    }
+
+
+
+
+
+
+
 
 
 

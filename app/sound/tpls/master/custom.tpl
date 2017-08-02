@@ -36,14 +36,15 @@
 						</span>
 					</h4>
 					<h4>{x2;if:$catid}{x2;$categories[$catid]['catname']}{x2;else}所有内容{x2;endif}</h4>
-					<form action="index.php?content-master-contents" method="post" class="form-inline">
+					<form action="index.php?sound-master-sound-custom" method="post" class="form-inline">
 						<table class="table">
 					        <tr>
 								<td>
 									人群：
 								</td>
 								<td>
-									<select name="search[grouptype]" class="form-control">
+									<select name="search[case_type]" class="form-control">
+										<option value="">请选择人群分类</option>
 										<option value="0">儿童</option>
 										<option value="1">成人</option>
 										<option value="2">老人</option>
@@ -53,7 +54,8 @@
 									声音分类：
 								</td>
 								<td>
-									<select name="search[soundtype]" class="form-control">
+									<select name="search[organ_type]" class="form-control">
+										<option value="">请选择声音分类</option>
 										<option value="0">心音</option>
 										<option value="1">呼吸音</option>
 										<option value="2">肠鸣音</option>
@@ -61,7 +63,7 @@
 								</td>
 								<td>病例名称:</td>
 								<td>
-									<input class="form-control" name="search[casename]" size="15" type="text" value="{x2;$search['casename']}"/>
+									<input class="form-control" name="search[case_name]" size="15" type="text" value="{x2;$search['casename']}"/>
 								</td>
 
 								<td>
@@ -74,82 +76,62 @@
 							<input type="hidden" value="1" name="search[argsmodel]" />
 						</div>
 					</form>
-					<form action="index.php?content-master-contents-lite" method="post">
-						<fieldset>
-							<table class="table table-hover table-bordered">
-								<thead>
-									<tr class="info">
-					                    <th>编号</th>
-					                    <th>病例名称</th>
-					                    <th>音源文件</th>
-								        <th>类型</th>
-								        <th>部位</th>
-								        <th>分类</th>
-								        <th>试听</th>
-								        <th>操作</th>
-					                </tr>
-					            </thead>
-					            <tbody>
-					            	{x2;tree:$contents['data'],content,cid}
-					            	<tr>
-					                    <td><input type="checkbox" name="delids[{x2;v:content['contentid']}]" value="1"></td>
-					                    <td><input class="form-control" type="text" name="ids[{x2;v:content['contentid']}]" value="{x2;v:content['contentsequence']}" style="width:32px;padding:2px 5px;"/></td>
-					                    <td>{x2;v:content['contentid']}</td>
-					                    <td class="picture"><img src="{x2;if:v:content['contentthumb']}{x2;v:content['contentthumb']}{x2;else}app/core/styles/images/noupload.gif{x2;endif}" alt="" style="width:48px;"/></td>
-					                    <td>
-					                        {x2;v:content['contenttitle']}
-					                    </td>
-					                    <td>
-					                    	<a href="?content-master-contents&catid={x2;v:content['contentcatid']}" target="">{x2;$categories[v:content['contentcatid']]['catname']}</a>
-					                    </td>
-					                    <td>
-					                    	{x2;date:v:content['contentinputtime'],'y-m-d'}
-					                    </td>
-					                    <td class="actions">
-					                    	<div class="btn-group">
-					                    		<a class="btn" href="index.php?content-master-contents-edit&catid={x2;v:content['contentcatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
-												<a class="btn confirm" href="index.php?content-master-contents-del&catid={x2;v:content['cncatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphicon-remove"></em></a>
-					                    	</div>
-					                    </td>
-					                </tr>
-					                {x2;endtree}
-					        	</tbody>
-					        </table>
-					        <div class="control-group">
-					            <div class="controls">
-						            <label class="radio-inline">
-						                <input type="radio" name="action" value="modify" checked/>排序
-						            </label>
-						            <!--
-						            <label class="radio inline">
-						                <input type="radio" name="action" value="moveposition" />推荐
-						            </label>
-						            -->
-						            <label class="radio-inline">
-						                <input type="radio" name="action" value="copycategory"/>复制
-						            </label>
-						            <label class="radio-inline">
-						                <input type="radio" name="action" value="movecategory" />移动
-						            </label>
-						            <label class="radio-inline">
-						                <input type="radio" name="action" value="delete" />删除
-						            </label>
-						            {x2;tree:$search,arg,sid}
-						            <input type="hidden"-name="search[{x2;v:key}]" value="{x2;v:arg}"/>
-						            {x2;endtree}
-						            <label class="radio-inline">
-						            	<button class="btn btn-primary" type="submit">提交</button>
-						            </label>
-						            <input type="hidden" name="modifycontentsequence" value="1"/>
-						            <input type="hidden" name="catid" value="{x2;$catid}"/>
-						            <input type="hidden" name="page" value="{x2;$page}"/>
-						        </div>
-					        </div>
-							<ul class="pagination pull-right">
-								{x2;$contents['pages']}
-							</ul>
-						</fieldset>
-					</form>
+					<fieldset>
+						<table class="table table-hover table-bordered">
+							<thead>
+								<tr class="info">
+									<th>编号</th>
+									<th>病例名称</th>
+									<th>音源文件</th>
+									<th>类型</th>
+									<th>部位</th>
+									<th>分类</th>
+									<th>试听</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								{x2;tree:$cases['data'],case,cid}
+								<tr>
+									<td>{x2;v:case['case_id']}</td>
+									<td>{x2;v:case['case_name']}</td>
+									<td>{x2;v:case['sound_name']}</td>
+									<td>
+										{x2;if:v:case['organ_type']==0}心音{x2;endif}
+										{x2;if:v:case['organ_type']==1}呼吸音{x2;endif}
+										{x2;if:v:case['organ_type']==2}肠鸣音{x2;endif}
+									</td>
+									<td>
+										<span class="pic" onmouseover="show(this)" onmouseout="hidd(this)" cid="{x2;v:case['case_id']}" sid="{x2;v:cid}">滑动</span>
+									</td>
+									<td>
+                                        {x2;if:v:case['case_type']==0}儿童{x2;endif}
+                                        {x2;if:v:case['case_type']==1}成人{x2;endif}
+                                        {x2;if:v:case['case_type']==2}老人{x2;endif}
+									</td>
+									<td align="center">
+										<div class="sound" onmouseover="play(this)" onmouseout="pause(this)" cid="{x2;v:case[case_id]}"><audio src="{x2;v:case[sound_file]}" id="audio{x2;v:case[case_id]}" loop="loop"/></div>
+									</td>
+									<td class="actions">
+										<div class="btn-group">
+											<a class="btn" href="index.php?content-master-contents-edit&catid={x2;v:content['contentcatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
+											<a class="btn confirm" href="index.php?content-master-contents-del&catid={x2;v:content['cncatid']}&contentid={x2;v:content['contentid']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphicon-remove"></em></a>
+										</div>
+									</td>
+								</tr>
+								<div style="position:absolute;top:0;display:none;z-index:1;height: 360px;" id="position{x2;v:case['case_id']}" class="{x2;if:v:case['organ_type']==0}heart_bak_img{x2;endif}{x2;if:v:case['organ_type']==1}lung_bak_img{x2;endif}">
+                                    {x2;tree:v:case['positions'],position,pid}
+									<img style="display: block;" src="/app/core/styles/img/point_img" class="{x2;if:v:case['organ_type']==0}heartpoint{x2;endif}{x2;if:v:case['organ_type']==1}lungPoint{x2;endif}{x2;v:position['play_position']}">
+                                    {x2;endtree}
+								</div>
+								{x2;endtree}
+							</tbody>
+						</table>
+
+						<ul class="pagination pull-right">
+							{x2;$contents['pages']}
+						</ul>
+					</fieldset>
 				</div>
 			</div>
 {x2;if:!$userhash}
@@ -157,6 +139,49 @@
 	</div>
 </div>
 {x2;include:footer}
+
 </body>
+<script type="text/javascript">
+	var sound = ""
+//	$(".sound").mouseover(function () {
+//	    var cid = "audio"+$(this).attr("cid");
+//	    console.log(cid);
+//		sound=document.getElementById(cid);
+//        sound.play();
+//    });
+	
+	function play(obj) {
+        var cid = "audio"+$(obj).attr("cid");
+        sound=document.getElementById(cid);
+        sound.play();
+    }
+
+    function pause(obj){
+        var cid = "audio"+$(obj).attr("cid");
+        sound=document.getElementById(cid);
+        sound.pause();
+	}
+
+	function show(obj,event) {
+        var e = event || window.event;
+        var x = e.clientX, y = e.clientY;
+        var position = "position" + $(obj).attr("cid");
+        var py = -115 + $(obj).attr("sid")*50;
+        var px = x-$("#"+position).width()/2-300;
+        $("#"+position).css(
+            {
+                "left" : px + "px",
+                "top" : py + "px"
+            }
+        );
+        $("#"+position).show();
+    }
+
+    function hidd(obj) {
+        var position = "position" + $(obj).attr("cid");
+        $("#"+position).hide();
+    }
+
+</script>
 </html>
 {x2;endif}
