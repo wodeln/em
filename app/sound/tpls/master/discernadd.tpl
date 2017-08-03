@@ -24,12 +24,12 @@
 						添加考场
 						<a class="btn btn-primary pull-right" href="index.php?exam-master-basic">鉴别听诊套餐管理</a>
 					</h4>
-					<form action="index.php?exam-master-basic-add" method="post" class="form-horizontal">
+					<form action="index.php?sound-master-discern-add" method="post" class="form-horizontal">
 						<fieldset>
                         <div class="form-group">
 							<label for="basic" class="control-label col-sm-2">分类名称</label>
 							<div class="col-sm-6">
-								<input class="form-control" id="basic" name="args[discern_name]" type="text" value="" needle="needle" msg="您必须输入分类名称" />
+								<input class="form-control" id="discern_name" name="args[discern_name]" type="text" value="" needle="needle" msg="您必须输入分类名称" />
 							</div>
 						</div>
 
@@ -37,14 +37,14 @@
                             <label for="basicsubjectid" class="control-label col-sm-2"></label>
                             <div class="col-sm-4" style="width: 70%">
 
-								<select style="margin: 0 20px 8px 0; width: 30%;" class="pull-left form-control combox">
+								<select style="margin: 0 20px 8px 0; width: 30%;" class="pull-left form-control combox" id="case_type">
 									<option value="">请选择病例人群</option>
 									<option value="0">儿童</option>
 									<option value="1">成人</option>
 									<option value="2">老人</option>
 								</select>
-								<input class="form-control pull-left" style="width: 30%;margin: 0 20px 8px 0;" id="basic" name="args[discern_name]" type="text" value="" placeholder="病例名称"/>
-								<button class="btn btn-primary" type="submit">确定</button>
+								<input class="form-control pull-left" style="width: 30%;margin: 0 20px 8px 0;" id="case_name" type="text" value="" placeholder="病例名称"/>
+								<button class="btn btn-primary" id="getCase" type="button">确定</button>
 								<div class="row">
                                     <div class="col-xs-5">
                                         <select  name="from[]" id="undo_redo" class="form-control" size="13" multiple="multiple" style="height:274px;">
@@ -62,7 +62,7 @@
                                     </div>
 
                                     <div class="col-xs-5">
-                                        <select name="to[]" id="undo_redo_to" class="form-control" size="13" multiple="multiple" style="height:275px;">
+                                        <select name="to[]" id="undo_redo_to" class="form-control" size="13" needle="needle" msg="您必须选择声音" multiple="multiple" style="height:275px;">
 
 										</select>
                                     </div>
@@ -106,8 +106,8 @@
 							<div class="col-sm-9">
 								<input type="hidden" class="btn btn-primary" name="page" value="{x2;$page}"/>
                                 <button class="btn btn-primary" type="submit">提交</button>
-								<input type="hidden" name="insertbasic" value="1"/>
-								<input type="hidden" name="args['case_type']" value="{x2;$discern['case_type']}"
+								<input type="hidden" name="insertDiscern" value="1"/>
+								<input type="hidden" id="organ_type" name="args[organ_type]" value="{x2;$organ_type}">
 								{x2;tree:$search,arg,aid}
 								<input type="hidden" name="search[{x2;v:key}]" value="{x2;v:arg}"/>
 								{x2;endtree}
@@ -133,7 +133,7 @@
                     for(var i = 0; i < b.length; i ++) {
                         var temp = b[i].value;
                         for(var j = 0; j < clone.length; j ++) {
-                            if(temp === clone[j]['userid']) {
+                            if(temp === clone[j]['case_id']) {
                                 clone.splice(j,1);
                             }
                         }
@@ -141,19 +141,28 @@
                     return clone;
                 }
 
-                $('#userClass').change(function () {
+                $('#getCase').click(function () {
+					var case_type = $("#case_type").val();
+					var organ_type  = $("#organ_type").val();
+					var case_name = $("#case_name").val();
                     $.ajax({
-                        type: 'get',
-                        url: "index.php?user-master-user-getUserByClassId&classid="+$(this).val(),
+                        type: 'post',
+                        url: "index.php?sound-master-discern-getCase",
+						data: {
+							'case_type' : case_type,
+							'organ_type' : organ_type,
+							'case_name' : case_name
+						},
                         success:function (data) {
                             var left = eval(data);
+                            console.log(left);
                             var right = $('#undo_redo_to option').slice(0);
                             var opt="";
 
                             var clone=difference(left,right);
 
                             $.each(clone, function(i, v) {
-                                opt+="<option value='"+v['userid']+"'>"+v['usertruename']+"</option>";
+                                opt+="<option value='"+v['case_id']+"'>"+v['case_name']+" &nbsp;&nbsp;&nbsp;部："+v['positions']+"</option>";
                             });
                             $('#undo_redo').html(opt);
                         }

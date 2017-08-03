@@ -143,10 +143,53 @@ class sound_sound
         return $this->db->fetchAll($sql);
 	}
 
+	public function getCaseListByInfo($args){
+		$data = array(false,'case1',$args);
+		$sql = $this->pdosql->makeSelect($data);
+		$r = $this->db->fetchAll($sql);
+		foreach ($r as $k=>$v){
+			$data = array(false,'case_position',array(array('AND',"case_id = :case_id",'case_id',$v['case_id'])),false,'play_position ASC');
+			$sql = $this->pdosql->makeSelect($data);
+			$r[$k]['positions'] = $this->db->fetchALL($sql);
+		}
+		return $r;
+	}
 
+	public function getDiscernByNameType($discern_name,$organ_type,$discern_id=null){
+		if($discern_id==null){
+            $data = array(false,'discern',array(
+                array('AND','discern_name = :discern_name','discern_name',$discern_name),
+                array('AND','organ_type = :organ_type','organ_type',$organ_type)
+            ));
+		}else{
+            $data = array(false,'discern',array(
+                array('AND','discern_name = :discern_name','discern_name',$discern_name),
+                array('AND','organ_type = :organ_type','organ_type',$organ_type),
+				array('AND','discern_id = :discern_id','discern_id',$discern_id)
+            ));
+		}
+		$sql = $this->pdosql->makeSelect($data);
+		return $this->db->fetch($sql);
+	}
 
+    public function addDiscernSound($discernSound,$discernId){
 
+        $sql['sql']	= "DELETE FROM x2_discern_sound WHERE discern_id=".$discernId;
+        $sql['v'] = null;
+        $this->db->exec($sql);
+        foreach ($discernSound as $v) {
+            $sql['sql'] = "INSERT INTO x2_discern_sound (case_id,discern_id) VALUE ($v,$discernId)";
+            $this->db->exec($sql);
+        }
+        return true;
+    }
 
+    public function insertDiscern($args){
+        $data = array('discern',$args);
+        $sql = $this->pdosql->makeInsert($data);
+        $this->db->exec($sql);
+        return $this->db->lastInsertId();
+	}
 
 
 

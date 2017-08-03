@@ -29,8 +29,8 @@
 						<span class="pull-right">
 							<a data-toggle="dropdown" class="btn btn-primary" href="#">添加鉴别听诊套餐 <strong class="caret"></strong></a>
 							<ul class="dropdown-menu">
-								<li><a href="index.php?sound-master-discern-add&case_type=0&page={x2;$page}">添加心音鉴别听诊套餐</a></li>
-								<li><a href="index.php?sound-master-discern-add&case_type=1&page={x2;$page}">添加呼吸音鉴别听诊套餐</a></li>
+								<li><a href="index.php?sound-master-discern-add&organ_type=0&page={x2;$page}">添加心音鉴别听诊套餐</a></li>
+								<li><a href="index.php?sound-master-discern-add&organ_type=1&page={x2;$page}">添加呼吸音鉴别听诊套餐</a></li>
 							</ul>
 						</span>
 					</h4>
