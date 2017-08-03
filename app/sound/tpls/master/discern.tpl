@@ -1,5 +1,6 @@
 {x2;if:!$userhash}
 {x2;include:header}
+
 <body>
 {x2;include:nav}
 <div class="container-fluid">
@@ -55,7 +56,7 @@
 								</td>
 
 								<td>
-									<button class="btn btn-primary" type="submit">提交</button>
+									<button class="btn btn-primary" id="mys" type="submit">提交</button>
 								</td>
 					        </tr>
 
@@ -89,13 +90,12 @@
 									</td>
 									<td align="center">
 										<div class="switch switch-mini">
-											<input discern_id="{x2;v:case['discern_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck"/>
+											<input class="ifuse" discern_id="2" type="checkbox" checked="" name="mycheck" autocomplete="off">
 										</div>
 									</td>
 									<td class="actions">
 										<div class="btn-group">
 											<a class="btn" href="{x2;if:v:case['organ_type']==0}index.php?sound-master-sound-heartedit{x2;endif}{x2;if:v:case['organ_type']==1}index.php?sound-master-sound-lungedit{x2;endif}&case_id={x2;v:case['case_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
-											<a class="btn confirm" href="index.php?sound-master-sound-del&case_id={x2;v:case['case_id']}&page={x2;$page}{x2;$u}" title="删除"><em class="glyphicon glyphicon-remove"></em></a>
 										</div>
 									</td>
 								</tr>
@@ -121,21 +121,31 @@
 {x2;include:footer}
 
 </body>
+<script src="app/core/styles/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
-    $('[name="mycheck"]').bootstrapSwitch({
-        onText:"启",
-        offText:"禁",
-        size:"mini",
-        handleWidth: 25,
-        onSwitchChange:function(event,state){
-			$.ajax({
-				type : "get",
-				url : "index.php?sound-master-discern-chageState&state="+state+"&discern_id="+$(this).attr("discern_id"),
-                success : function (data) {
-                }
-			});
-        }
-    })
+
+	$("#mys").click(function () {
+        var t=setTimeout(load_switch,100);
+    });
+
+	$(window).load(load_switch);
+
+	function load_switch() {
+        $(".ifuse").bootstrapSwitch({
+            onText:"启",
+            offText:"禁",
+            size:"mini",
+            handleWidth: 25,
+            onSwitchChange:function(event,state){
+                $.ajax({
+                    type : "get",
+                    url : "index.php?sound-master-discern-chageState&state="+state+"&discern_id="+$(this).attr("discern_id"),
+                    success : function (data) {
+                    }
+                });
+            }
+        });
+    }
 
 </script>
 </html>
