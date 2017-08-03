@@ -97,6 +97,26 @@ class action extends app
         }
     }
 
+    private function discernEdit(){
+        $discern_id = $this->ev->get("discern_id");
+        $organ_type = $this->ev->get("organ_type");
+        $discern = $this->sound->getDiscernById($discern_id);
+        $selectCase = $this->sound->getCaseByDiscernId($discern_id);
+        foreach ($selectCase as $k=>$v){
+            $positionList = $this->sound->getPositionByCaseId($v['case_id']);
+            $str="";
+            foreach ($positionList as $key=>$value){
+                $str.=$value['play_position'].",";
+            }
+            $selectCase[$k]['positions'] = substr($str,0,strlen($str)-1) ;
+
+        }
+        $this->tpl->assign("discern",$discern);
+        $this->tpl->assign("organ_type",$organ_type);
+        $this->tpl->assign("selectCase",$selectCase);
+        $this->tpl->display("discernedit");
+    }
+
     private function getCase(){
         $case_type= $this->ev->post("case_type");
         $organ_type= $this->ev->post("organ_type");;

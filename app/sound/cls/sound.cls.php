@@ -199,13 +199,7 @@ class sound_sound
         $sql = $this->pdosql->makeSelect($data);
         $r['data'] = $this->db->fetchALL($sql,false,'caseinfo');
         foreach ($r['data'] as $k=>$v){
-//            $data = array(false,'discern_sound',array(array('AND',"discern_id = :discern_id",'discern_id',$v['discern_id'])));
-//            $sql = $this->pdosql->makeSelect($data);
-			$sql['sql'] = "SELECT ds.*,c.case_name FROM x2_discern_sound AS ds 
-							LEFT JOIN x2_case1 AS c ON ds.case_id = c.case_id
-							WHERE ds.discern_id = ".$v["discern_id"];
-			$sql['v']	= null;
-            $r['data'][$k]['case'] = $this->db->fetchALL($sql);
+            $r['data'][$k]['case'] = $this->getCaseByDiscernId($v["discern_id"]);
         }
         $data = array('COUNT(*) AS number','discern',$args,false,false,false);
         $sql = $this->pdosql->makeSelect($data);
@@ -222,7 +216,19 @@ class sound_sound
         $this->db->exec($sql);
 	}
 
+	public function getDiscernById($discern_id){
+        $data = array(false,array('discern'),array(array('AND',"discern_id = :discern_id",'discern_id',$discern_id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
 
+	public function getCaseByDiscernId($discern_id){
+        $sql['sql'] = "SELECT ds.*,c.case_name FROM x2_discern_sound AS ds 
+						LEFT JOIN x2_case1 AS c ON ds.case_id = c.case_id
+						WHERE ds.discern_id = ".$discern_id;
+        $sql['v']	= null;
+        return $this->db->fetchALL($sql);
+	}
 
 
 

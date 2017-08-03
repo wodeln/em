@@ -95,7 +95,7 @@
 									</td>
 									<td class="actions">
 										<div class="btn-group">
-											<a class="btn" href="{x2;if:v:case['organ_type']==0}index.php?sound-master-sound-heartedit{x2;endif}{x2;if:v:case['organ_type']==1}index.php?sound-master-sound-lungedit{x2;endif}&case_id={x2;v:case['case_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
+											<a class="btn" href="index.php?sound-master-discern-discernedit&discern_id={x2;v:case['discern_id']}&organ_type={x2;v:case['organ_type']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
 										</div>
 									</td>
 								</tr>
