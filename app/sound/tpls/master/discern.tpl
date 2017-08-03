@@ -56,7 +56,7 @@
 								</td>
 
 								<td>
-									<button class="btn btn-primary" id="mys" type="submit">提交</button>
+									<button class="btn btn-primary" onclick="cc()" type="submit">提交</button>
 								</td>
 					        </tr>
 
@@ -124,9 +124,9 @@
 <script src="app/core/styles/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
 
-	$("#mys").click(function () {
-        var t=setTimeout(load_switch,100);
-    });
+	function cc() {
+        setTimeout(load_switch,100);
+    }
 
 	$(window).load(load_switch);
 
