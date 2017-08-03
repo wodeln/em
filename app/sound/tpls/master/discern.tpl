@@ -123,7 +123,6 @@
 </body>
 <script src="app/core/styles/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
-
 	function cc() {
         setTimeout(load_switch,100);
     }
@@ -146,7 +145,6 @@
             }
         });
     }
-
 </script>
 </html>
 {x2;endif}
