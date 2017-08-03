@@ -69,36 +69,28 @@
 							<thead>
 								<tr class="info">
 									<th>编号</th>
-									<th>病例名称</th>
-									<th>音源文件</th>
+									<th>分类名称</th>
+									<th>鉴别听诊音</th>
 									<th>类型</th>
-									<th>部位</th>
-									<th>分类</th>
-									<th>试听</th>
+									<th>禁用</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								{x2;tree:$cases['data'],case,cid}
+								{x2;tree:$discern['data'],case,cid}
 								<tr>
-									<td>{x2;v:case['case_id']}</td>
-									<td>{x2;v:case['case_name']}</td>
-									<td>{x2;v:case['sound_name']}</td>
+									<td>{x2;v:case['discern_id']}</td>
+									<td>{x2;v:case['discern_name']}</td>
+									<td>{x2;v:case['case']}</td>
 									<td>
 										{x2;if:v:case['organ_type']==0}心音{x2;endif}
 										{x2;if:v:case['organ_type']==1}呼吸音{x2;endif}
 										{x2;if:v:case['organ_type']==2}肠鸣音{x2;endif}
 									</td>
-									<td>
-										<span class="pic" onmouseover="show(this)" onmouseout="hidd(this)" cid="{x2;v:case['case_id']}" sid="{x2;v:cid}">滑动</span>
-									</td>
-									<td>
-                                        {x2;if:v:case['case_type']==0}儿童{x2;endif}
-                                        {x2;if:v:case['case_type']==1}成人{x2;endif}
-                                        {x2;if:v:case['case_type']==2}老人{x2;endif}
-									</td>
 									<td align="center">
-										<div class="sound" onmouseover="play(this)" onmouseout="pause(this)" cid="{x2;v:case[case_id]}"><audio src="{x2;v:case[sound_file]}" id="audio{x2;v:case[case_id]}" loop="loop"/></div>
+										<div class="switch switch-mini">
+											<input discern_id="{x2;v:case['discern_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck"/>
+										</div>
 									</td>
 									<td class="actions">
 										<div class="btn-group">
@@ -130,45 +122,20 @@
 
 </body>
 <script type="text/javascript">
-	var sound = ""
-//	$(".sound").mouseover(function () {
-//	    var cid = "audio"+$(this).attr("cid");
-//	    console.log(cid);
-//		sound=document.getElementById(cid);
-//        sound.play();
-//    });
-
-	function play(obj) {
-        var cid = "audio"+$(obj).attr("cid");
-        sound=document.getElementById(cid);
-        sound.play();
-    }
-
-    function pause(obj){
-        var cid = "audio"+$(obj).attr("cid");
-        sound=document.getElementById(cid);
-        sound.pause();
-	}
-
-	function show(obj,event) {
-        var e = event || window.event;
-        var x = e.clientX, y = e.clientY;
-        var position = "position" + $(obj).attr("cid");
-        var py = -115 + $(obj).attr("sid")*50;
-        var px = x-$("#"+position).width()/2-300;
-        $("#"+position).css(
-            {
-                "left" : px + "px",
-                "top" : py + "px"
-            }
-        );
-        $("#"+position).show();
-    }
-
-    function hidd(obj) {
-        var position = "position" + $(obj).attr("cid");
-        $("#"+position).hide();
-    }
+    $('[name="mycheck"]').bootstrapSwitch({
+        onText:"启",
+        offText:"禁",
+        size:"mini",
+        handleWidth: 25,
+        onSwitchChange:function(event,state){
+			$.ajax({
+				type : "get",
+				url : "index.php?sound-master-discern-chageState&state="+state+"&discern_id="+$(this).attr("discern_id"),
+                success : function (data) {
+                }
+			});
+        }
+    })
 
 </script>
 </html>

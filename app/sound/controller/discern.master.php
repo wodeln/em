@@ -19,6 +19,36 @@ class action extends app
     }
 
     private function index(){
+
+        $page = $this->ev->get('page')?$this->ev->get('page'):1;
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+
+        if(strlen($search['organ_type']))$args[] = array('AND',"organ_type = :organ_type",'organ_type',$search['organ_type']);
+        if(strlen($search['discern_name']))$args[] = array('AND',"discern_name LIKE :discern_name",'discern_name','%'.$search['discern_name'].'%');
+
+        $discern = $this->sound->getDiscernList($page,10,$args);
+
+        foreach ($discern['data'] as $k=>$v){
+            $str = "";
+            foreach ($v['case'] as $key=>$value){
+                $str.=$value['case_name'].",";
+            }
+            $discern['data'][$k]['case'] = substr($str,0,strlen($str)-1) ;
+        }
+
+        $this->tpl->assign('discern',$discern);
+        $this->tpl->assign('search',$search);
+        $this->tpl->assign('u',$u);
+        $this->tpl->assign('page',$page);
+
         $this->tpl->display("discern");
     }
 
@@ -83,6 +113,14 @@ class action extends app
             $caseList[$k]['positions'] = substr($str,0,strlen($str)-1) ;
         }
         exit(json_encode($caseList));
+    }
+
+    private function chageState(){
+       $state = $this->ev->get("state");
+       $discern_id = $this->ev->get("discern_id");
+       if($state=="false") $args['if_use']=0;
+       else $args['if_use']=1;
+       $this->sound->changeDiscernState($args,$discern_id);
     }
 }
 

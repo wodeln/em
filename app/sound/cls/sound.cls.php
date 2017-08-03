@@ -191,6 +191,47 @@ class sound_sound
         return $this->db->lastInsertId();
 	}
 
+    public function getDiscernList($page,$number = 20,$args = 1)
+    {
+        $page = $page > 0?$page:1;
+        $r = array();
+        $data = array(false,'discern',$args,false,'discern_id DESC',array(intval($page-1)*$number,$number));
+        $sql = $this->pdosql->makeSelect($data);
+        $r['data'] = $this->db->fetchALL($sql,false,'caseinfo');
+        foreach ($r['data'] as $k=>$v){
+//            $data = array(false,'discern_sound',array(array('AND',"discern_id = :discern_id",'discern_id',$v['discern_id'])));
+//            $sql = $this->pdosql->makeSelect($data);
+			$sql['sql'] = "SELECT ds.*,c.case_name FROM x2_discern_sound AS ds 
+							LEFT JOIN x2_case1 AS c ON ds.case_id = c.case_id
+							WHERE ds.discern_id = ".$v["discern_id"];
+			$sql['v']	= null;
+            $r['data'][$k]['case'] = $this->db->fetchALL($sql);
+        }
+        $data = array('COUNT(*) AS number','discern',$args,false,false,false);
+        $sql = $this->pdosql->makeSelect($data);
+        $tmp = $this->db->fetch($sql);
+        $r['number'] = $tmp['number'];
+        $pages = $this->pg->outPage($this->pg->getPagesNumber($tmp['number'],$number),$page);
+        $r['pages'] = $pages;
+        return $r;
+    }
+
+    public function changeDiscernState($args,$discern_id){
+        $data = array('discern',$args,array(array('AND',"discern_id = :discern_id",'discern_id',$discern_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
