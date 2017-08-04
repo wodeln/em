@@ -90,7 +90,7 @@
 									</td>
 									<td align="center">
 										<div class="switch switch-mini">
-											<input class="ifuse" discern_id="2" type="checkbox" checked="" name="mycheck" autocomplete="off">
+											<input class="ifuse" discern_id="{x2;v:case['discern_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck">
 										</div>
 									</td>
 									<td class="actions">
@@ -124,7 +124,7 @@
 <script src="app/core/styles/js/bootstrap-switch.js"></script>
 <script type="text/javascript">
 	function cc() {
-        setTimeout(load_switch,100);
+        setTimeout(load_switch,200);
     }
 
 	$(window).load(load_switch);
