@@ -98,23 +98,64 @@ class action extends app
     }
 
     private function discernEdit(){
-        $discern_id = $this->ev->get("discern_id");
-        $organ_type = $this->ev->get("organ_type");
-        $discern = $this->sound->getDiscernById($discern_id);
-        $selectCase = $this->sound->getCaseByDiscernId($discern_id);
-        foreach ($selectCase as $k=>$v){
-            $positionList = $this->sound->getPositionByCaseId($v['case_id']);
-            $str="";
-            foreach ($positionList as $key=>$value){
-                $str.=$value['play_position'].",";
+        if($this->ev->post("modifyDiscern")){
+            $discern_id = $this->ev->post("discern_id");
+            $organ_type = $this->ev->post("organ_type");
+            $page=$this->ev->post('page');
+            $args = $this->ev->post('args');
+            $discernSound = $this->ev->post('to');
+            $discern = $this->sound->getDiscernByNameType($args['discern_name'],$args['organ_type'],$discern_id);
+            if ($discern) {
+                $errmsg = "该分类下已有 " . $args['discern_name'] . " 套餐";
             }
-            $selectCase[$k]['positions'] = substr($str,0,strlen($str)-1) ;
+            if(count($discernSound)==0) $errmsg = "请正确选择鉴别病例声音";
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
 
+
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->sound->updateDiscern($args,$discern_id);
+            $this->sound->addDiscernSound($discernSound, $discern_id);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?sound-master-discern&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }else{
+            $discern_id = $this->ev->get("discern_id");
+            $organ_type = $this->ev->get("organ_type");
+            $page=$this->ev->get('page');
+            $discern = $this->sound->getDiscernById($discern_id);
+            $selectCase = $this->sound->getCaseByDiscernId($discern_id);
+            foreach ($selectCase as $k=>$v){
+                $positionList = $this->sound->getPositionByCaseId($v['case_id']);
+                $str="";
+                foreach ($positionList as $key=>$value){
+                    $str.=$value['play_position'].",";
+                }
+                $selectCase[$k]['positions'] = substr($str,0,strlen($str)-1) ;
+
+            }
+            $this->tpl->assign("discern",$discern);
+            $this->tpl->assign("organ_type",$organ_type);
+            $this->tpl->assign("selectCase",$selectCase);
+            $this->tpl->display("discernedit");
         }
-        $this->tpl->assign("discern",$discern);
-        $this->tpl->assign("organ_type",$organ_type);
-        $this->tpl->assign("selectCase",$selectCase);
-        $this->tpl->display("discernedit");
     }
 
     private function getCase(){

@@ -191,6 +191,12 @@ class sound_sound
         return $this->db->lastInsertId();
 	}
 
+	public function updateDiscern($args,$discern_id){
+        $data = array('discern',$args,array(array('AND',"discern_id = :discern_id",'discern_id',$discern_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+	}
+
     public function getDiscernList($page,$number = 20,$args = 1)
     {
         $page = $page > 0?$page:1;

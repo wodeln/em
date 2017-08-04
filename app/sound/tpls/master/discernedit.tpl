@@ -24,7 +24,7 @@
 						添加考场
 						<a class="btn btn-primary pull-right" href="index.php?exam-master-basic">鉴别听诊套餐管理</a>
 					</h4>
-					<form action="index.php?sound-master-discern-add" method="post" class="form-horizontal">
+					<form action="index.php?sound-master-discern-discernedit" method="post" class="form-horizontal">
 						<fieldset>
                         <div class="form-group">
 							<label for="basic" class="control-label col-sm-2">分类名称</label>
@@ -108,7 +108,8 @@
 							<div class="col-sm-9">
 								<input type="hidden" class="btn btn-primary" name="page" value="{x2;$page}"/>
                                 <button class="btn btn-primary" type="submit">提交</button>
-								<input type="hidden" name="insertDiscern" value="1"/>
+								<input type="hidden" name="modifyDiscern" value="1"/>
+								<input type="hidden" name="discern_id" value="{x2;$discern[discern_id]}"/>
 								<input type="hidden" id="organ_type" name="args[organ_type]" value="{x2;$organ_type}">
 								{x2;tree:$search,arg,aid}
 								<input type="hidden" name="search[{x2;v:key}]" value="{x2;v:arg}"/>
