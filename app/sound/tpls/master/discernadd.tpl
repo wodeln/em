@@ -21,7 +21,7 @@
 				</div>
 				<div class="box itembox" style="padding-top:10px;margin-bottom:0px;">
 					<h4 class="title" style="padding:10px;">
-						添加考场
+						添加鉴别听诊
 						<a class="btn btn-primary pull-right" href="index.php?exam-master-basic">鉴别听诊套餐管理</a>
 					</h4>
 					<form action="index.php?sound-master-discern-add" method="post" class="form-horizontal">
