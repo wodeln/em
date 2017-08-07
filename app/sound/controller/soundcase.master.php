@@ -51,6 +51,75 @@ class action extends app
         else $args['if_use']=1;
         $this->sound->changeSoundCaseState($args,$sound_case_id);
     }
+
+    private function soundCasePackage(){
+        $this->tpl->display('sound_case_package');
+    }
+
+    private function packageAdd(){
+        $page=$this->ev->post('page');
+        if($this->ev->get('insertPackage')) {
+            $args = $this->ev->post('args');
+            $packageItems = $this->ev->post('to');
+            $package = $this->sound->getPackageByName($args['package_name']);
+            if ($package) {
+                $errmsg = "该分套餐名称已存在";
+            }
+            if(count($packageItems)==0) $errmsg = "请正确选择鉴别听诊或标准化病例";
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+            $user = $this->user->getUserById($this->session->getSessionUser()['sessionuserid']);
+            $args['add_name']= $user['usertruename'];
+            $args['add_time'] = time();
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $packageId = $this->sound->insertPackage($args);
+            $this->sound->addPackageItems($packageItems, $packageId);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?sound-master-soundcase-soundCasePackage&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }else{
+            $this->tpl->display('package_add');
+        }
+
+    }
+
+    private function getContent(){
+        $type = $this->ev->post("type");
+        $case_type = $this->ev->post("case_type");
+        $organ_type = $this->ev->post("organ_type");
+        $case_name = $this->ev->post("case_name");
+
+        $case = array();
+        $args[] = array('AND',"if_use = :if_use",'if_use',1);
+        if($type==1){
+            if(strlen($case_name))$args[] = array('AND',"case_name LIKE :case_name",'case_name','%'.$case_name.'%');
+            if(strlen($organ_type))$args[] = array('AND',"organ_type = :organ_type",'organ_type',$organ_type);
+            $data = $this->sound->getDiscern($args);
+        }else{
+            if(strlen($case_type))$args[] = array('AND',"case_type = :case_type",'case_type',$case_type);
+            if(strlen($case_name))$args[] = array('AND',"case_name LIKE :case_name",'case_name','%'.$case_name.'%');
+            if(strlen($organ_type))$args[] = array('AND',"organ_type = :organ_type",'organ_type',$organ_type);
+            $data = $this->sound->getSoundCase($args);
+        }
+        exit(json_encode($data));
+    }
 }
 
 ?>

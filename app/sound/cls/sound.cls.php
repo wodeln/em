@@ -258,6 +258,56 @@ class sound_sound
         $this->db->exec($sql);
     }
 
+	public function getDiscern($args){
+        $data = array('discern_id as case_id,discern_name as case_name','discern',$args,false,'discern_id DESC');
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetchAll($sql);
+	}
+
+	public function getSoundCase($args){
+        $data = array('sound_case_id as case_id,sound_case_name as case_name','sound_case',$args,false,'sound_case_id DESC');
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetchAll($sql);
+	}
+
+	public function insertPackage($args){
+        $data = array('soundcase_package',$args);
+        $sql = $this->pdosql->makeInsert($data);
+        $this->db->exec($sql);
+        return $this->db->lastInsertId();
+	}
+
+	public function addPackageItems($packageItems, $packageId){
+        $sql['sql']	= "DELETE FROM x2_soundcase_package_case WHERE soundcase_package_id=".$packageId;
+        $sql['v'] = null;
+        $this->db->exec($sql);
+        foreach ($packageItems as $v) {
+        	$value = explode(",",$v);
+            $sql['sql'] = "INSERT INTO x2_soundcase_package_case (case_id,soundcase_package_id,type_id) VALUE ($value[0],$packageId,$value[1])";
+            $this->db->exec($sql);
+        }
+        return true;
+	}
+
+	public function getPackageByName($package_name,$package_id=null){
+        if($package_id==null){
+            $data = array(false,'soundcase_package',array(
+                array('AND','package_name = :package_name','package_name',$package_name),
+            ));
+        }else{
+            $data = array(false,'soundcase_package',array(
+                array('AND','package_name = :package_name','package_name',$package_name),
+                array('AND','soundcase_package_id = :soundcase_package_id','soundcase_package_id',$package_id)
+            ));
+        }
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
+
+
+
+
+
 
 
 
