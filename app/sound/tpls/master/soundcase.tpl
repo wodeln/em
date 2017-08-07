@@ -1,6 +1,5 @@
 {x2;if:!$userhash}
 {x2;include:header}
-
 <body>
 {x2;include:nav}
 <div class="container-fluid">
@@ -16,43 +15,48 @@
 						<ol class="breadcrumb">
 							<li><a href="index.php?{x2;$_app}-master">{x2;$apps[$_app]['appname']}</a></li>
 							{x2;if:$catid}
-							<li><a href="index.php?{x2;$_app}-master-contents">鉴别听诊</a></li>
+							<li><a href="index.php?{x2;$_app}-master-contents">标准化病例</a></li>
 							<li class="active">{x2;$categories[$catid]['catname']}</li>
 							{x2;else}
-							<li class="active">鉴别听诊</li>
+							<li class="active">标准化病例</li>
 							{x2;endif}
 						</ol>
 					</div>
 				</div>
 				<div class="box itembox" style="padding-top:10px;margin-bottom:0px;overflow:visible">
 					<h4 class="title" style="padding:10px;">
-						鉴别听诊套餐管理
-						<span class="pull-right">
-							<a data-toggle="dropdown" class="btn btn-primary" href="#">添加鉴别听诊套餐 <strong class="caret"></strong></a>
-							<ul class="dropdown-menu">
-								<li><a href="index.php?sound-master-discern-add&organ_type=0&page={x2;$page}">添加心音鉴别听诊套餐</a></li>
-								<li><a href="index.php?sound-master-discern-add&organ_type=1&page={x2;$page}">添加呼吸音鉴别听诊套餐</a></li>
-							</ul>
-						</span>
+						标准化病例
+
 					</h4>
 					<h4>{x2;if:$catid}{x2;$categories[$catid]['catname']}{x2;else}所有内容{x2;endif}</h4>
-					<form action="index.php?sound-master-discern" method="post" class="form-inline">
+					<form action="index.php?sound-master-soundcase" method="post" class="form-inline">
 						<table class="table">
 					        <tr>
 								<td>
-									声音分类：
+									人群：
+								</td>
+								<td>
+									<select name="search[case_type]" class="form-control">
+										<option value="">请选择人群分类</option>
+										<option value="0">儿童</option>
+										<option value="1">成人</option>
+										<option value="2">老人</option>
+									</select>
+								</td>
+								<td>
+									异常部位：
 								</td>
 								<td>
 									<select name="search[organ_type]" class="form-control">
-										<option value="">请选择声音分类</option>
+										<option value="">请选择异常部位</option>
 										<option value="0">心音</option>
-										<option value="1">呼吸音</option>
+										<option value="1">呼吸音< /option>
 										<option value="2">肠鸣音</option>
 									</select>
 								</td>
-								<td>关键字:</td>
+								<td>病例名称:</td>
 								<td>
-									<input class="form-control" name="search[discern_name]" size="15" type="text" value="{x2;$search['discern_name']}"/>
+									<input class="form-control" name="search[sound_case_name]" size="15" type="text" value="{x2;$search['sound_case_name']}"/>
 								</td>
 
 								<td>
@@ -70,32 +74,34 @@
 							<thead>
 								<tr class="info">
 									<th>编号</th>
-									<th>分类名称</th>
-									<th>鉴别听诊音</th>
-									<th>类型</th>
-									<th>禁用</th>
+									<th>听诊病例名称</th>
+									<th>异常部位</th>
+									<th>分类</th>
+									<th>指定扩音试听</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
-								{x2;tree:$discern['data'],case,cid}
+								{x2;tree:$cases['data'],case,cid}
 								<tr>
-									<td>{x2;v:case['discern_id']}</td>
-									<td>{x2;v:case['discern_name']}</td>
-									<td>{x2;v:case['case']}</td>
+									<td>{x2;v:case['sound_case_id']}</td>
+									<td>{x2;v:case['sound_case_name']}</td>
 									<td>
 										{x2;if:v:case['organ_type']==0}心音{x2;endif}
 										{x2;if:v:case['organ_type']==1}呼吸音{x2;endif}
 										{x2;if:v:case['organ_type']==2}肠鸣音{x2;endif}
 									</td>
+									<td>
+                                        {x2;if:v:case['case_type']==0}儿童{x2;endif}
+                                        {x2;if:v:case['case_type']==1}成人{x2;endif}
+                                        {x2;if:v:case['case_type']==2}老人{x2;endif}
+									</td>
 									<td align="center">
-										<div class="switch switch-mini">
-											<input class="ifuse" discern_id="{x2;v:case['discern_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck">
-										</div>
+										<div class="sound" onmouseover="play(this)" onmouseout="pause(this)" scid="{x2;v:case[sound_case_id]}"><audio src="{x2;v:case[sound_file]}" id="audio{x2;v:case[sound_case_id]}" loop="loop"/></div>
 									</td>
 									<td class="actions">
-										<div class="btn-group">
-											<a class="btn" href="index.php?sound-master-discern-discernedit&discern_id={x2;v:case['discern_id']}&organ_type={x2;v:case['organ_type']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
+										<div class="switch switch-mini">
+											<input class="ifuse" sound_case_id="{x2;v:case['sound_case_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck">
 										</div>
 									</td>
 								</tr>
@@ -117,13 +123,33 @@
 
 </body>
 <script type="text/javascript">
-	function cc() {
+	var sound = ""
+//	$(".sound").mouseover(function () {
+//	    var cid = "audio"+$(this).attr("cid");
+//	    console.log(cid);
+//		sound=document.getElementById(cid);
+//        sound.play();
+//    });
+	
+	function play(obj) {
+        var scid = "audio"+$(obj).attr("scid");
+        sound=document.getElementById(scid);
+        sound.play();
+    }
+
+    function pause(obj){
+        var scid = "audio"+$(obj).attr("scid");
+        sound=document.getElementById(scid);
+        sound.pause();
+	}
+
+    function cc() {
         setTimeout(load_switch,200);
     }
 
-	$(window).load(load_switch);
+    $(window).load(load_switch);
 
-	function load_switch() {
+    function load_switch() {
         $(".ifuse").bootstrapSwitch({
             onText:"启",
             offText:"禁",
@@ -132,13 +158,14 @@
             onSwitchChange:function(event,state){
                 $.ajax({
                     type : "get",
-                    url : "index.php?sound-master-discern-chageState&state="+state+"&discern_id="+$(this).attr("discern_id"),
+                    url : "index.php?sound-master-soundcase-chageState&state="+state+"&sound_case_id="+$(this).attr("sound_case_id"),
                     success : function (data) {
                     }
                 });
             }
         });
     }
+
 </script>
 </html>
 {x2;endif}

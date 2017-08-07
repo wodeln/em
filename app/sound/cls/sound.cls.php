@@ -236,6 +236,27 @@ class sound_sound
         return $this->db->fetchALL($sql);
 	}
 
+    public function getSoundCaseList($page,$number = 20,$args = 1)
+    {
+        $page = $page > 0?$page:1;
+        $r = array();
+        $data = array(false,'sound_case',$args,false,'sound_case_id DESC',array(intval($page-1)*$number,$number));
+        $sql = $this->pdosql->makeSelect($data);
+        $r['data'] = $this->db->fetchALL($sql,false,'caseinfo');
+        $data = array('COUNT(*) AS number','sound_case',$args,false,false,false);
+        $sql = $this->pdosql->makeSelect($data);
+        $tmp = $this->db->fetch($sql);
+        $r['number'] = $tmp['number'];
+        $pages = $this->pg->outPage($this->pg->getPagesNumber($tmp['number'],$number),$page);
+        $r['pages'] = $pages;
+        return $r;
+    }
+
+    public function changeSoundCaseState($args,$sound_case_id){
+        $data = array('sound_case',$args,array(array('AND',"sound_case_id = :sound_case_id",'sound_case_id',$sound_case_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+    }
 
 
 
