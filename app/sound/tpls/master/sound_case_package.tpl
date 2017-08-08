@@ -34,32 +34,8 @@
 					<form action="index.php?sound-master-soundcase" method="post" class="form-inline">
 						<table class="table">
 					        <tr>
-								<td>
-									人群：
-								</td>
-								<td>
-									<select name="search[case_type]" class="form-control">
-										<option value="">请选择人群分类</option>
-										<option value="0">儿童</option>
-										<option value="1">成人</option>
-										<option value="2">老人</option>
-									</select>
-								</td>
-								<td>
-									异常部位：
-								</td>
-								<td>
-									<select name="search[organ_type]" class="form-control">
-										<option value="">请选择异常部位</option>
-										<option value="0">心音</option>
-										<option value="1">呼吸音< /option>
-										<option value="2">肠鸣音</option>
-									</select>
-								</td>
-								<td>病例名称:</td>
-								<td>
-									<input class="form-control" name="search[sound_case_name]" size="15" type="text" value="{x2;$search['sound_case_name']}"/>
-								</td>
+
+								<td>套餐名称：<input class="form-control" name="search[sound_case_name]" size="15" type="text" value="{x2;$search['sound_case_name']}"/></td>
 
 								<td>
 									<button class="btn btn-primary" onclick="cc()" type="submit">提交</button>
@@ -76,35 +52,27 @@
 							<thead>
 								<tr class="info">
 									<th>编号</th>
-									<th>听诊病例名称</th>
-									<th>异常部位</th>
-									<th>分类</th>
-									<th>指定扩音试听</th>
+									<th>套餐名称</th>
+									<th>听诊病例</th>
+									<th>鉴别听诊</th>
+									<th>创建人</th>
+									<th>创建时间</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
 								{x2;tree:$cases['data'],case,cid}
 								<tr>
-									<td>{x2;v:case['sound_case_id']}</td>
-									<td>{x2;v:case['sound_case_name']}</td>
-									<td>
-										{x2;if:v:case['organ_type']==0}心音{x2;endif}
-										{x2;if:v:case['organ_type']==1}呼吸音{x2;endif}
-										{x2;if:v:case['organ_type']==2}肠鸣音{x2;endif}
-									</td>
-									<td>
-                                        {x2;if:v:case['case_type']==0}儿童{x2;endif}
-                                        {x2;if:v:case['case_type']==1}成人{x2;endif}
-                                        {x2;if:v:case['case_type']==2}老人{x2;endif}
-									</td>
+									<td>{x2;v:case['soundcase_package_id']}</td>
+									<td>{x2;v:case['package_name']}</td>
+									<td>{x2;v:case['sound_case']}</td>
+									<td>{x2;v:case['discern']}</td>
 									<td align="center">
-										<div class="sound" onmouseover="play(this)" onmouseout="pause(this)" scid="{x2;v:case[sound_case_id]}"><audio src="{x2;v:case[sound_file]}" id="audio{x2;v:case[sound_case_id]}" loop="loop"/></div>
+                                        {x2;v:case['add_name']}
 									</td>
+									<td>{x2;v:case['add_time']}</td>
 									<td class="actions">
-										<div class="switch switch-mini">
-											<input class="ifuse" sound_case_id="{x2;v:case['sound_case_id']}" type="checkbox" {x2;if:v:case['if_use']==1}checked{x2;endif} name="mycheck">
-										</div>
+										<a class="btn" href="index.php?sound-master-soundcase-packageEdit&sound_case_id={x2;v:case['soundcase_package_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
 									</td>
 								</tr>
 								{x2;endtree}

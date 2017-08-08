@@ -53,6 +53,42 @@ class action extends app
     }
 
     private function soundCasePackage(){
+        $page = $this->ev->get('page')?$this->ev->get('page'):1;
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+//        $args[]=array('AND',"system_custom = :system_custom",'system_custom',1);
+        if(strlen($search['package_name']))$args[] = array('AND',"package_name LIKE :package_name",'package_name','%'.$search['package_name'].'%');
+
+        $cases = $this->sound->getSoundCasePackageList($page,10,$args);
+
+        foreach ($cases['data'] as $k=>$v){
+            $soundCaseStr = "";
+            $discernStr = "";
+            $casePackage = $this->sound->getCasePackage($v['soundcase_package_id']);
+            foreach ($casePackage as $k1=>$v1){
+                if($v1['type_id']==0){
+                    $soundCase = $this->sound->getSoundCaseById($v1['case_id']);
+                    $soundCaseStr.=$soundCase['sound_case_name'].",";
+                }else{
+                    $discern = $this->sound->getDiscernById($v1['case_id']);
+                    $discernStr.=$discern['discern_name'].",";
+                }
+            }
+            $cases['data'][$k]['sound_case'] = substr($soundCaseStr,0,strlen($soundCaseStr)-1);
+            $cases['data'][$k]['discern'] = substr($discernStr,0,strlen($discernStr)-1);
+        }
+
+        $this->tpl->assign('cases',$cases);
+        $this->tpl->assign('search',$search);
+        $this->tpl->assign('u',$u);
+        $this->tpl->assign('page',$page);
         $this->tpl->display('sound_case_package');
     }
 
@@ -91,12 +127,16 @@ class action extends app
                 'statusCode' => 200,
                 "message" => "操作成功",
                 "callbackType" => "forward",
-                "forwardUrl" => "index.php?sound-master-soundcase-soundCasePackage&page={$page}{$this->u}"
+                "forwardUrl" => "index.php?sound-master-soundCasePackage&page={$page}{$this->u}"
             );
             exit(json_encode($message));
         }else{
             $this->tpl->display('package_add');
         }
+
+    }
+
+    private function packageEdit(){
 
     }
 

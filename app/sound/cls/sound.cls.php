@@ -304,8 +304,36 @@ class sound_sound
         return $this->db->fetch($sql);
 	}
 
+    public function getSoundCasePackageList($page,$number = 20,$args = 1)
+    {
+        $page = $page > 0?$page:1;
+        $r = array();
+        $data = array(false,'soundcase_package',$args,false,'soundcase_package_id DESC',array(intval($page-1)*$number,$number));
+        $sql = $this->pdosql->makeSelect($data);
+        $r['data'] = $this->db->fetchALL($sql);
+        $data = array('COUNT(*) AS number','soundcase_package',$args,false,false,false);
+        $sql = $this->pdosql->makeSelect($data);
+        $tmp = $this->db->fetch($sql);
+        $r['number'] = $tmp['number'];
+        $pages = $this->pg->outPage($this->pg->getPagesNumber($tmp['number'],$number),$page);
+        $r['pages'] = $pages;
+        return $r;
+    }
 
+    public function getCasePackage($package_id){
+        $data = array(false,array('soundcase_package_case'),array(array('AND',"soundcase_package_id = :soundcase_package_id",'soundcase_package_id',$package_id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetchAll($sql);
+	}
 
+	public function getSoundCaseById($sound_case_id){
+		$data = array(false,'sound_case',array(
+			array('AND','sound_case_id = :sound_case_id','sound_case_id',$sound_case_id),
+			array('AND','if_use = :if_use','if_use',1)
+		));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
 
 
 
