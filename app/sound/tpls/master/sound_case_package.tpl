@@ -72,7 +72,7 @@
 									</td>
 									<td>{x2;v:case['add_time']}</td>
 									<td class="actions">
-										<a class="btn" href="index.php?sound-master-soundcase-packageEdit&sound_case_id={x2;v:case['soundcase_package_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
+										<a class="btn" href="index.php?sound-master-soundcase-packageEdit&soundcase_package_id={x2;v:case['soundcase_package_id']}&page={x2;$page}{x2;$u}" title="修改"><em class="glyphicon glyphicon-edit"></em></a>
 									</td>
 								</tr>
 								{x2;endtree}

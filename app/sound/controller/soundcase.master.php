@@ -137,7 +137,66 @@ class action extends app
     }
 
     private function packageEdit(){
+        $page = $this->ev->get("page");
+        if($this->ev->post("editPackage")){
+            $args = $this->ev->post('args');
+            $packageItems = $this->ev->post('to');
+            $soundcase_package_case_id = $this->ev->post("soundcase_package_id");
+            $package = $this->sound->getPackageByName($args['package_name'],$soundcase_package_case_id);
+            if ($package) {
+                $errmsg = "该分套餐名称已存在";
+            }
+            if(count($packageItems)==0) $errmsg = "请正确选择鉴别听诊或标准化病例";
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+//            $user = $this->user->getUserById($this->session->getSessionUser()['sessionuserid']);
+//            $args['add_name']= $user['usertruename'];
+//            $args['add_time'] = time();
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->sound->updatePackage($args,$soundcase_package_case_id);
+            $this->sound->addPackageItems($packageItems, $soundcase_package_case_id);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?sound-master-soundcase-soundCasePackage&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+        }else{
+            $soundcase_package_id = $this->ev->get("soundcase_package_id");
+            $cases = $this->sound->getSoundCasePackageById($soundcase_package_id,1);
 
+            $casePackage = $this->sound->getCasePackage($cases['soundcase_package_id']);
+            $selectCase = "";
+            foreach ($casePackage as $k1=>$v1){
+                if($v1['type_id']==0){
+                    $soundCase = $this->sound->getSoundCaseById($v1['case_id']);
+                    $selectCase[$k1]['case_id'] = $soundCase['sound_case_id'].",".$v1['type_id'];
+                    $selectCase[$k1]['case_name'] = $soundCase['sound_case_name'];
+                }else{
+                    $discern = $this->sound->getDiscernById($v1['case_id']);
+                    $selectCase[$k1]['case_id'] = $discern['discern_id'].",".$v1['type_id'];
+                    $selectCase[$k1]['case_name'] = $discern['discern_name'];
+                }
+            }
+            $this->tpl->assign('cases',$cases);
+            $this->tpl->assign('selectCase',$selectCase);
+            $this->tpl->assign('page',$page);
+            $this->tpl->display('package_edit');
+        }
     }
 
     private function getContent(){

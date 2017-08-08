@@ -165,7 +165,7 @@ class sound_sound
             $data = array(false,'discern',array(
                 array('AND','discern_name = :discern_name','discern_name',$discern_name),
                 array('AND','organ_type = :organ_type','organ_type',$organ_type),
-				array('AND','discern_id = :discern_id','discern_id',$discern_id)
+				array('AND','discern_id != :discern_id','discern_id',$discern_id)
             ));
 		}
 		$sql = $this->pdosql->makeSelect($data);
@@ -297,7 +297,7 @@ class sound_sound
         }else{
             $data = array(false,'soundcase_package',array(
                 array('AND','package_name = :package_name','package_name',$package_name),
-                array('AND','soundcase_package_id = :soundcase_package_id','soundcase_package_id',$package_id)
+                array('AND','soundcase_package_id != :soundcase_package_id','soundcase_package_id',$package_id)
             ));
         }
         $sql = $this->pdosql->makeSelect($data);
@@ -326,15 +326,43 @@ class sound_sound
         return $this->db->fetchAll($sql);
 	}
 
-	public function getSoundCaseById($sound_case_id){
-		$data = array(false,'sound_case',array(
-			array('AND','sound_case_id = :sound_case_id','sound_case_id',$sound_case_id),
-			array('AND','if_use = :if_use','if_use',1)
-		));
+	public function getSoundCaseById($sound_case_id,$if_all=0){
+    	if($if_all==0){
+            $data = array(false,'sound_case',array(
+                array('AND','sound_case_id = :sound_case_id','sound_case_id',$sound_case_id),
+                array('AND','if_use = :if_use','if_use',1)
+            ));
+		}else{
+            $data = array(false,'sound_case',array(
+                array('AND','sound_case_id = :sound_case_id','sound_case_id',$sound_case_id)
+            ));
+		}
+
         $sql = $this->pdosql->makeSelect($data);
         return $this->db->fetch($sql);
 	}
 
+	public function getSoundCasePackageById($soundcase_package_id,$if_all=0){
+        if($if_all==0){
+            $data = array(false,'soundcase_package',array(
+                array('AND','soundcase_package_id = :soundcase_package_id','soundcase_package_id',$soundcase_package_id),
+                array('AND','if_use = :if_use','if_use',1)
+            ));
+        }else{
+            $data = array(false,'soundcase_package',array(
+                array('AND','soundcase_package_id = :soundcase_package_id','soundcase_package_id',$soundcase_package_id)
+            ));
+        }
+
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
+
+	public function updatePackage($args,$package_id){
+        $data = array('soundcase_package',$args,array(array('AND',"soundcase_package_id = :soundcase_package_id",'soundcase_package_id',$package_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+	}
 
 
 
