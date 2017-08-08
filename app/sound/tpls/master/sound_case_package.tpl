@@ -31,11 +31,11 @@
 						</span>
 					</h4>
 					<h4>{x2;if:$catid}{x2;$categories[$catid]['catname']}{x2;else}所有内容{x2;endif}</h4>
-					<form action="index.php?sound-master-soundcase" method="post" class="form-inline">
+					<form action="index.php?sound-master-soundcase-soundCasePackage" method="post" class="form-inline">
 						<table class="table">
 					        <tr>
 
-								<td>套餐名称：<input class="form-control" name="search[sound_case_name]" size="15" type="text" value="{x2;$search['sound_case_name']}"/></td>
+								<td>套餐名称：<input class="form-control" name="search[package_name]" size="15" type="text" value="{x2;$search['package_name']}"/></td>
 
 								<td>
 									<button class="btn btn-primary" onclick="cc()" type="submit">提交</button>
