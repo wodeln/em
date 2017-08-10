@@ -173,9 +173,117 @@ class action extends app
 		}
 		$attach = $this->attach->getAttachList($args,$page);
 		$this->tpl->assign('attachtypes',$types);
-		$this->tpl->assign('attach',$attach);
-		$this->tpl->display('attachs');
+        $this->tpl->assign('attach',$attach);
+        $this->tpl->display('attachs');
+    }
+
+	private function getCourseFile(){
+        $search = $this->ev->get('search');
+        $u = '';
+        if($search)
+        {
+            $this->tpl->assign('search',$search);
+            foreach($search as $key => $arg)
+            {
+                $u .= "&search[{$key}]={$arg}";
+            }
+        }
+        $this->tpl->assign('u',$u);
+        $page = $this->ev->get('page');
+        $this->tpl->assign('page',$page);
+        $page = $page > 0?$page:1;
+        $args = array();
+        if($search['course_name']) $args[] = $args[] = array('AND',"course_name LIKE :course_name",'course_name','%'.$search['course_name'].'%');
+        $course = $this->attach->getCourseList($args);
+
+
+        $this->tpl->assign('page',$page);
+        $this->tpl->assign('search',$search);
+        $this->tpl->assign('course',$course);
+        $this->tpl->display('content');
 	}
+
+	private function addCourse(){
+		$page = $this->ev->get("page");
+		if($this->ev->post("insertCourse")){
+            $args = $this->ev->post("args");
+            $course = $this->attach->getCourseByName($args['courese_name']);
+            if ($course) {
+                $errmsg = "该课件名称已存在";
+            }
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->attach->insertCourse($args);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?document-master-files-getCourseFile&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+		}else{
+            $this->tpl->assign('page',$page);
+            $this->tpl->display('content_add');
+		}
+
+	}
+
+	private function courseEdit(){
+        $page = $this->ev->get("page");
+		if($this->ev->post("modifyCourse")){
+            $args = $this->ev->post("args");
+            $course_id = $this->ev->post("custom_course_id");
+            $course = $this->attach->getCourseByName($args['course_name'],$course_id);
+            if ($course) {
+                $errmsg = "该课件名称已存在";
+            }
+            if ($errmsg) {
+                $message = array(
+                    'statusCode' => 300,
+                    "message" => "{$errmsg}",
+                    "navTabId" => "",
+                    "rel" => ""
+                );
+                exit(json_encode($message));
+            }
+            $search = $this->ev->get('search');
+            $u = '';
+            if ($search) {
+                foreach ($search as $key => $arg) {
+                    $u .= "&search[{$key}]={$arg}";
+                }
+            }
+            $this->attach->updateCourse($args,$course_id);
+            $message = array(
+                'statusCode' => 200,
+                "message" => "操作成功",
+                "callbackType" => "forward",
+                "forwardUrl" => "index.php?document-master-files-getCourseFile&page={$page}{$this->u}"
+            );
+            exit(json_encode($message));
+		}else{
+            $course_id = $this->ev->get("course_id");
+            $course = $this->attach->getCourseById($course_id);
+            $this->tpl->assign('course',$course);
+            $this->tpl->display('content_edit');
+		}
+	}
+
+
 }
 
 

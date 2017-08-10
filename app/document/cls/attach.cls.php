@@ -132,6 +132,68 @@ class attach_document
 		$this->db->exec($sql);
 		return $this->db->affectedRows();
 	}
+
+    /**
+	 * 根据课件名称查询课件对象
+     * @param $course_name 课件名称
+     * @return 课件对象
+     */
+	public function getCourseByName($course_name,$course_id=null){
+		if($course_id==null){
+            $data = array(false,'custom_course',array(array('AND',"course_name = :course_name",'course_name',$course_name)));
+		}else{
+            $data = array(false,'custom_course',
+				array(array('AND',"course_name = :course_name",'course_name',$course_name),
+                    array('AND',"custom_course_id != :custom_course_id",'custom_course_id',$course_id)
+
+				));
+		}
+
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
+
+    /**
+	 * 插入课件
+     * @param $args 表单数据
+     * @return 插入课件的主键ID
+     */
+	public function insertCourse($args){
+        $data = array('custom_course',$args);
+        $sql = $this->pdosql->makeInsert($data);
+        $this->db->exec($sql);
+        return $this->db->lastInsertId();
+	}
+
+    /**
+	 * 获取自定义课件列表
+     * @param $args 搜索条件
+     * @param $page 当前页码
+     * @param int $number 每页显示数量
+     * @return 自定义课件对象list
+     */
+	public function getCourseList($args,$page,$number = PN){
+        $data = array(
+            'select' => false,
+            'table' => 'custom_course',
+            'query' => $args,
+            'index' => 'custom_course_id'
+        );
+        $r = $this->db->listElements($page,$number,$data);
+        return $r;
+	}
+
+	public function getCourseById($course_id){
+        $data = array(false,'custom_course',array(array('AND',"custom_course_id = :custom_course_id",'custom_course_id',$course_id)));
+        $sql = $this->pdosql->makeSelect($data);
+        return $this->db->fetch($sql);
+	}
+
+	public function updateCourse($args,$course_id){
+        $data = array('custom_course',$args,array(array('AND',"custom_course_id = :custom_course_id",'custom_course_id',$course_id)));
+        $sql = $this->pdosql->makeUpdate($data);
+        $this->db->exec($sql);
+	}
 }
 
 ?>
