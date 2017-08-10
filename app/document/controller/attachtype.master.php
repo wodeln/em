@@ -95,6 +95,10 @@ class action extends app
 		$this->tpl->assign('types',$types);
 		$this->tpl->display('types');
 	}
+
+	private function courseList(){
+        $this->tpl->display('course_list');
+	}
 }
 
 
