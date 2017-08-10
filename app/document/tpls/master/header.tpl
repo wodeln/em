@@ -9,7 +9,6 @@
 	<link rel="stylesheet" type="text/css" href="app/core/styles/css/datetimepicker.css" />
 	<link rel="stylesheet" type="text/css" href="app/core/styles/css/jquery-ui.min.css" />
 	<link rel="stylesheet" type="text/css" href="app/core/styles/css/peskin.css" />
-	<link rel="stylesheet" type="text/css" href="app/core/styles/css/style.css" />
 	<!--[if lt IE 9]>
 	<script src="app/core/styles/js/html5shiv.min.js"></script>
 	<script src="app/core/styles/js/respond.min.js"></script>

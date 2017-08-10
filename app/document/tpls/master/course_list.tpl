@@ -1,5 +1,6 @@
 {x2;if:!$userhash}
 {x2;include:header}
+<link rel="stylesheet" type="text/css" href="app/core/styles/css/style.css" />
 <body>
 {x2;include:nav}
 <div class="container-fluid">
