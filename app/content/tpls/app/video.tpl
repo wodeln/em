@@ -36,7 +36,7 @@
 	<div class="modal-dialog" style="min-width: 780px;">
 		<div class="modal-content" style="min-width: 780px;">
 			<div class="modal-header my-modal-header">
-				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
+				<button aria-hidden="true" class="close" id="close1" type="button" data-dismiss="modal">×</button>
 			</div>
 			<div class="modal-body" id="modal-body"></div>
 		</div>
@@ -44,4 +44,40 @@
 </div>
 {x2;include:footer}
 </body>
+<script type="javascript">
+   /* $(".close11").click(function () {
+        console.log(111);
+        alert(22);
+        // var myVideo = document.getElementById("v");
+        // myVideo.pause();
+    });*/
+
+   $("#close1").click(function () {
+       console.log(33);
+       var myVideo = document.getElementById("v1");
+       myVideo.pause();
+   });
+
+    function pause1(obj) {
+        alert(11);
+        console.log(22);
+        // var myVideo = document.getElementById("v");
+        // myVideo.pause();
+    }
+</script>
+<script>
+
+    $(function () {
+        $('#video_modal').on('hide.bs.modal', function () {
+        var myVideo = document.getElementById("v");
+        myVideo.pause();
+    	});
+        $('#video_modal').on('shown.bs.modal', function () {
+            var myVideo = document.getElementById("v");
+            setTimeout(function(){
+                myVideo.play();
+            },1000);
+        })
+    });
+</script>
 </html>

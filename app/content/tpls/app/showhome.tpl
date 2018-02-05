@@ -20,11 +20,16 @@
 	</div>
 	<div class="choice" style="margin-top:20px;overflow:hidden;">
 		<div class="btn-group pull-right hide answerbox">
-            {x2;if:$number > 1}
-            <a class="btn btn-primary selfmodal"  data-target="#modal" href="javascript:;" title="上一题" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number={x2;eval: echo intval($number - 1)}">上一题</a>
+			{x2;if:$number != $allnumber}
+				{x2;if:$number > 1}
+				<a class="btn btn-primary selfmodal"  data-target="#modal" href="javascript:;" title="上一题" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number={x2;eval: echo intval($number - 1)}">上一题</a>
+				{x2;endif}
+				{x2;if:$number < $allnumber}
+				<a class="btn btn-primary selfmodal"  data-target="#modal" href="javascript:;" title="下一题" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number={x2;eval: echo intval($number + 1)}">下一题</a>
+				{x2;endif}
             {x2;endif}
-            {x2;if:$number < $allnumber}
-            <a class="btn btn-primary selfmodal"  data-target="#modal" href="javascript:;" title="下一题" url="index.php?content-app-index-showhome&questionid={x2;$question['qrid']}&number={x2;eval: echo intval($number + 1)}">下一题</a>
+            {x2;if:$number == $allnumber}
+				<button aria-hidden="true" data-dismiss="modal" type="button" class="btn btn-primary" onclick="">完成测试</button>
             {x2;endif}
 		</div>
 	</div>

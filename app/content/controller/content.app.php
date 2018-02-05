@@ -44,7 +44,8 @@ class action extends app
 	private function getvideos(){
         $page = $this->ev->get('page');
         $page = $page?$page:1;
-        $args[] = Array("AND","coursecsid = :coursecsid",'coursecsid',0);
+//        $args[] = Array("AND","coursecsid = :coursecsid",'coursecsid',0);
+		$args = 1;
         $videos = $this->course->getVedioList($args,$page,9);
         $this->tpl->assign("videos",$videos);
         $this->tpl->display("video");

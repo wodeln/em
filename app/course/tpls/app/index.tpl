@@ -1,27 +1,58 @@
 {x2;include:header}
+<style type="text/css">
+	.course_list{
+		font-size: 20px;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		marker: none;
+	}
+	.course_list li{
+		width: 50%;
+		display: block;
+		float: left;
+		height: 45px;
+		line-height: 45px;
+		padding-left: 10px;
+	}
+	.l3 a{
+		padding-left: 180px;
+	}
+</style>
 <body>
 {x2;include:nav}
-{x2;tree:$course,course,cid}
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="main box itembox top30 border-bottom">
-			<div class="col-lg-7" style="padding:0px;">
-				<div class="pull-left">
-					<p class="course_title">{x2;v:course['coursetitle']}</p>
-					<div>{x2;realhtml:v:course['coursedescribe']}</div>
-				</div>
-			</div>
-			<div class="pull-right more">
-                {x2;if:v:course['ppt_file']!=''}
-					<a target="_blank" href="ViewerJS/#../{x2;v:course['ppt_file']}">查看详情</a>
-                {x2;endif}
-                {x2;if:v:course['course_files']!=''}
-				<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;v:course['courseid']}">查看详情</a>
-                {x2;endif}
-                {x2;if:v:course['course_files']=='' && v:course['ppt_file']==''}
-					<a target="_blank" href="index.php?course-app-course-gethtmlcourse&courseid={x2;v:course['courseid']}">查看详情</a>
-                {x2;endif}
-
+			<div class="col-lg-12" style="padding:0px;">
+				<p class="course_title">创伤急救课程</p>
+				<u class="course_list">
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=1">心脏骤停与心肺复苏</a>
+					</li>
+					<li class="l3">
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=2">成人基础生命支持</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=3">创伤的院前急救</a>
+					</li>
+					<li class="l3">
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=4">多发创伤</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=5">脊柱颈椎损伤</a>
+					</li>
+					<li class="l3">
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=6">气道异物阻塞与处理</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=7">清创术</a>
+					</li>
+					<li class="l3">
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=8"> 烧伤的急救</a>
+					</li>
+				</u>
 			</div>
 		</div>
 	</div>
@@ -37,7 +68,7 @@
 		</div>
 	</div>
 </div>
-{x2;endtree}
+
 {x2;include:footer}
 </body>
 </html>

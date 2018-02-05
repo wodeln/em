@@ -136,7 +136,7 @@
 										{x2;v:basic['basic']}
 									</td>
 									<td>
-										{x2;$areas[v:basic['basicareaid']]['area']}
+                                        {x2;v:basic['placename']}
 									</td>
 									<td>
 										{x2;$subjects[v:basic['basicsubjectid']]['subject']}

@@ -14,12 +14,6 @@
 	<script src="app/core/styles/js/respond.min.js"></script>
 	<![endif]-->
 	<script src="app/core/styles/js/jquery.min.js"></script>
-	<script src="app/core/styles/js/jquery-ui.min.js"></script>
 	<script src="app/core/styles/js/bootstrap.min.js"></script>
-	<script src="app/core/styles/js/bootstrap-datetimepicker.js"></script>
 
-	<script src="app/core/styles/js/all.fine-uploader.min.js"></script>
-
-	<script src="app/core/styles/js/ckeditor/ckeditor.js"></script>
-	<script src="app/core/styles/js/plugin.js"></script>
 </head>

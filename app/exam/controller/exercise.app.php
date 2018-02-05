@@ -401,6 +401,27 @@ class action extends app
 		}
 	}
 
+	private function makeexercise(){
+        $this->session->setSessionValue(array('sessioncurrent'=>6));
+        $questype = $this->basic->getQuestypeList();
+        $sections = $this->section->getSectionListByArgs(array(array("AND","sectionsubjectid = :sectionsubjectid",'sectionsubjectid',2)));
+        $knows = $this->section->getAllKnowsBySubject($this->data['currentbasic']['basicsubjectid']);
+        $knowids = '';
+        foreach($knows as $key => $p)
+            $knowids .= "{$key},";
+        $knowids = trim($knowids," ,");
+        $numbers = array();
+        foreach($questype as $p)
+        {
+            $numbers[$p['questid']] = intval(ceil($this->exam->getQuestionNumberByQuestypeAndKnowsid($p['questid'],$knowids)));
+        }
+        $this->tpl->assign('basicnow',$this->data['currentbasic']);
+        $this->tpl->assign('sections',$sections);
+        $this->tpl->assign('questype',$questype);
+        $this->tpl->assign('numbers',$numbers);
+        $this->tpl->display('exercise');
+	}
+
 	private function index()
 	{
 		$questype = $this->basic->getQuestypeList();

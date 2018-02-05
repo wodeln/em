@@ -5,26 +5,22 @@
 	<div class="row-fluid">
 		<div class="main" style="height:450px;overflow:hidden;">
 
-			<div class="col-xs-10 box split" style="padding:0px;width:100%;">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<div class="col-xs-10 box split" style="padding:0px;width:100%;margin: 0;">
+				<div id="carousel-example-generic" class="carousel slide">
 					<!-- Indicators -->
-					<ol class="carousel-indicators" style="left:90%;bottom:0px;">
-						{x2;tree:$contents[2]['data'],content,cid}
-						<li data-target="#carousel-example-generic" data-slide-to="{x2;v:key}"{x2;if:v:cid == 1} class="active"{x2;endif}></li>
-						{x2;endtree}
-					</ol>
+
 					<!-- Wrapper for slides -->
-					<div class="carousel-inner" role="listbox">
-						{x2;tree:$contents[2]['data'],content,cid}
-						<div class="item{x2;if:v:cid == 1} active{x2;endif}">
-							<a href="index.php?content-app-content&contentid={x2;v:content['contentid']}">
-								<img src="{x2;v:content['contentthumb']}" alt="" style="width:100%;">
-							</a>
+					<div class="carousel-inner">
+
+						<div class="item active">
+
+								<img src="files/home/1.png" alt="" style="width:100%;height: 450px;">
+
 							<div class="carousel-caption">
-								<!--{x2;v:content['contenttitle']}-->
+
 							</div>
 						</div>
-						{x2;endtree}
+
 					</div>
 					<!-- Controls
 					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -77,10 +73,10 @@
 				<div class="video pull-left" style="position:relative;">
 					<div style="position:relative; z-index:1;">
 						<video style="margin-top:1px;position:relative;" width="100%">
-							<source src="{x2;$vedio['course_files']}" type="video/mp4">
+							<source src="/files/video/腰椎融合.mp4" type="video/mp4">
 						</video>
 					</div>
-					<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal" url="index.php?content-app-index-showhomevedio&courseid={x2;$vedio['courseid']}">
+					<a class="selfmodal" href="javascript:;" data-toggle="modal" data-target="#video_modal">
 						<div class="play_img">
 							<img src="app/core/styles/img/play.png"/>
 						</div>
@@ -96,31 +92,47 @@
 		<div class="main"><img src="app/core/styles/img/ad2.png"/></div>
 	</div>
 </div>-->
+
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="main">
 			<div class="col-xs-4 box itembox" style="min-height:320px;">
-				<h4 class="title"><a href="index.php?content-app-category&catid=1">{x2;$rcats[1]['catname']}</a></h4>
+				<h4 class="title">急救知识</h4>
 				<ul class="list-unstyled">
-					{x2;tree:$contents[1]['data'],content,cid}
-					<li><a href="index.php?content-app-content&contentid={x2;v:content['contentid']}" title="{x2;v:content['contenttitle']}">{x2;v:content['contenttitle']}</a></li>
-					{x2;endtree}
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=1" title="心脏骤停与心肺复苏">心脏骤停与心肺复苏</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=3" title="创伤的院前急救">创伤的院前急救</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=8" title="烧伤的急救">烧伤的急救</a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-xs-4 box itembox split" style="min-height:320px;">
-				<h4 class="title"><a href="index.php?content-app-category&catid=3">{x2;$rcats[3]['catname']}</a></h4>
+				<h4 class="title">创伤知识</h4>
 				<ul class="list-unstyled">
-					{x2;tree:$contents[3]['data'],content,cid}
-					<li><a href="index.php?content-app-content&contentid={x2;v:content['contentid']}" title="{x2;v:content['contenttitle']}">{x2;v:content['contenttitle']}</a></li>
-					{x2;endtree}
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=5" title="脊柱颈椎损伤">脊柱颈椎损伤</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=4" title="多发创伤">多发创伤</a>
+					</li>
 				</ul>
 			</div>
 			<div class="col-xs-4 box itembox" style="min-height:320px;">
-				<h4 class="title"><a href="index.php?content-app-category&catid=4">{x2;$rcats[4]['catname']}</a></h4>
+				<h4 class="title">创伤处置</h4>
 				<ul class="list-unstyled">
-					{x2;tree:$contents[4]['data'],content,cid}
-					<li><a href="index.php?content-app-content&contentid={x2;v:content['contentid']}" title="{x2;v:content['contenttitle']}">{x2;v:content['contenttitle']}</a></li>
-					{x2;endtree}
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=7" title="清创术">清创术</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=2" title="成人基础生命支持">成人基础生命支持</a>
+					</li>
+					<li>
+						<a href="index.php?course-app-course-viewCustomeCourse&courseid=6" title="气道异物阻塞与处理">气道异物阻塞与处理</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -132,7 +144,13 @@
 			<div class="modal-header my-modal-header">
 				<button aria-hidden="true" class="close" type="button" data-dismiss="modal">×</button>
 			</div>
-            <div class="modal-body" id="modal-body"></div>
+            <div class="modal-body" id="modal-body">
+				<div class="modal-body" id="modal-body">
+					<video id="v2" style="margin:7px 10px 10px 7px;" controls="true" width="98%">
+						<source src="files/video/腰椎融合.mp4" type="video/mp4">
+					</video>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

@@ -96,19 +96,19 @@
 							    <textarea id="contentdescribe" name="args[csdescribe]" class="form-control" rows="4">{x2;realhtml:$course['csdescribe']}</textarea>
 					        </div>
 				        </div>
-				        <div class="form-group">
+				        <div class="form-group" style="display: none;">
 							<label class="control-label col-sm-2">免费课程</label>
 							<div class="col-sm-9">
 								<label class="radio-inline">
-									<input name="args[csdemo]" type="radio" value="1" {x2;if:$course['csdemo']}checked{x2;endif}/>是
+									<input name="args[csdemo]" type="radio" value="1" checked/>是
 								</label>
 								<label class="radio-inline">
-									<input name="args[csdemo]" type="radio" value="0" {x2;if:!$course['csdemo']}checked{x2;endif}/>否
+									<input name="args[csdemo]" type="radio" value="0"/>否
 								</label>
 								<span class="help-block">免费课程无须开通即可学习</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group" style="display: none;">
 							<label for="basicprice" class="control-label col-sm-2">价格设置</label>
 							<div class="col-sm-9">
 								<textarea class="form-control" rows="4" name="args[csprice]" id="csprice">{x2;$course['csprice']}</textarea>

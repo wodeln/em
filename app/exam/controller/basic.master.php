@@ -795,10 +795,11 @@ class action extends app
         $search = $this->ev->get('search');
         $page = $page > 1 ? $page : 1;
         $subjects = $this->basic->getSubjectList();
-        if (!$search)
+       /* if (!$search)
             $args = 1;
         else
-            $args = array();
+            $args = array();*/
+        $args[] = array("AND", "basicid != :basicid", 'basicid', 6);
         if ($search['basicid']) $args[] = array("AND", "basicid = :basicid", 'basicid', $search['basicid']);
         else {
             if ($search['keyword']) $args[] = array("AND", "basic LIKE :basic", 'basic', "%{$search['keyword']}%");
@@ -812,6 +813,7 @@ class action extends app
                 $args[] = array("AND", "basicclosed = :basicclosed", 'basicclosed', $basicclosed);
             }
         }
+
         $basics = $this->basic->getBasicList($page, 10, $args);
         $areas = $this->area->getAreaList();
         $this->tpl->assign('areas', $areas);

@@ -163,6 +163,12 @@ class action extends app
         $this->tpl->assign('course',$course);
         $this->tpl->display('course_html');
 	}
+
+	private function viewCustomeCourse(){
+        $courseid = $this->ev->get('courseid');
+        $templets = "course".$courseid;
+        $this->tpl->display($templets);
+	}
 }
 
 

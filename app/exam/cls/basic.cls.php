@@ -44,7 +44,16 @@ class basic_exam
 
 	public function getOpenBasicsByUserid($userid)
 	{
-		$data = array(false,array('openbasics','basic'),array(array("AND","openbasics.obuserid = :userid",'userid',$userid),array("AND","basic.basicclosed = 0"),array("AND","openbasics.obbasicid = basic.basicid"),array("AND","openbasics.obendtime > :obendtime",'obendtime',TIME)),false,"openbasics.obendtime DESC,obid DESC",false);
+		$data = array(false,
+				array('openbasics','basic'),
+				array(array("AND","openbasics.obuserid = :userid",'userid',$userid),
+				array("AND","basic.basicclosed = 0"),
+				array("AND","openbasics.obbasicid != 6"),
+				array("AND","openbasics.obbasicid = basic.basicid"),
+				array("AND","openbasics.obendtime > :obendtime",'obendtime',TIME)),
+				false,
+				"openbasics.obendtime DESC,obid DESC",
+				false);
 		$sql = $this->pdosql->makeSelect($data);
 		return $this->db->fetchAll($sql,'obbasicid',array('basicknows','basicsection','basicexam'));
 	}
@@ -180,6 +189,12 @@ class basic_exam
 		$data = array(false,'basic',$args,false,"basicid DESC",array(intval($page-1)*$number,$number));
 		$sql = $this->pdosql->makeSelect($data);
 		$r['data'] = $this->db->fetchAll($sql,'basicid',array('basicknows','basicsection','basicexam'));
+        foreach ($r['data'] as $k=>$v){
+            $sqlPlace['sql'] = "SELECT * FROM x2_place WHERE placeid=".$v['placeid'];
+            $sqlPlace['v']	 = null;
+            $res = $this->db->fetch($sqlPlace);
+            $r['data'][$k]['placename']=$res['place']."-".$res['address'];
+        }
 		$data = array('count(*) AS number','basic',$args);
 		$sql = $this->pdosql->makeSelect($data);
 		$t = $this->db->fetch($sql);

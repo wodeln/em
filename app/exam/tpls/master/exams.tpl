@@ -26,7 +26,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="index.php?{x2;$_app}-master-exams-autopage&page={x2;$page}{x2;$u}">随机组卷</a></li>
 								<li><a href="index.php?{x2;$_app}-master-exams-selfpage&page={x2;$page}{x2;$u}">手动组卷</a></li>
-								<li><a href="index.php?{x2;$_app}-master-exams-temppage&page={x2;$page}{x2;$u}">即时组卷</a></li>
+								<!--<li><a href="index.php?{x2;$_app}-master-exams-temppage&page={x2;$page}{x2;$u}">即时组卷</a></li>-->
 							</ul>
 						</span>
 					</h4>
@@ -50,7 +50,7 @@
 										<option value="0">不限</option>
 										<option value="1"{x2;if:$search['examtype'] == 1} selected{x2;endif}>随机抽题</option>
 										<option value="2"{x2;if:$search['examtype'] == 2} selected{x2;endif}>手动抽题</option>
-										<option value="2"{x2;if:$search['examtype'] == 3} selected{x2;endif}>即时组卷</option>
+										<!--<option value="2"{x2;if:$search['examtype'] == 3} selected{x2;endif}>即时组卷</option>-->
 									</select>
 								</td>
 								<td>
@@ -75,7 +75,7 @@
 						<thead>
 							<tr class="info">
 			                    <th>ID</th>
-						        <th>考试名称</th>
+						        <th>试卷名称</th>
 						        <th>组卷人</th>
 						        <th>组卷类型</th>
 						        <th>组卷时间</th>
